@@ -25,7 +25,8 @@ passport.deserializeUser((id, done) => {
 passport.use(new GoogleStrategy({ // sends the user to the ggogle server for authentication
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback'// the route in our server the user is sent to after they grant permission to the application
+    callbackURL: '/auth/google/callback',// the route in our server the user is sent to after they grant permission to the application
+    proxy: true // the callbackURL relative path causes problems in deployment beacuse passport uses http and not https address for heroko, because of heroku proxy. this is unaccepted by google, so setting proxy to true prevents it.
 }, (accessToken, refreshToken, profile, done) => { // taking back the information from google
     User.findOne({ googleId: profile.id }) // query - look in the User collection and find an item with this profile.id. returns a promise
         .then((existingUser) => {
