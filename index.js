@@ -18,7 +18,10 @@ mongoose.connect(keys.mongoURI);
 
 const app = express(); //there can be several express apps in one project
 
- //tell express to enable use of cookies:
+// on post/put/patch request - parse the body and assign it to the req.body property of the incoming request object:
+app.use(express.json());
+
+//tell express to enable use of cookies:
 app.use(
     cookieSession({
         maxAge/*how long the cookie can exist inside the browser before expiration*/: 30 * 24 * 60 * 60 * 1000, /*30 days in milliseconds*/
@@ -30,6 +33,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authRoutes')(app); //the require returns a function. we call that function with the app object
+require('./routes/billingRoutes')(app);
+
+//runs only on deployment:
+if (process.env.NODE_ENV === 'production') { // NODE_ENV is a variable automatically set by heroku
+    // Express will serve up production assets, like main.js main.css files:
+    app.use(express.static('client/build')); //first check - if there is a request coming and there is no route handler for it, then look into the build directory for a matching file
+    // Express will serve up the index.html file if it doesn't recognize the route (route was defined in react router and stored in the client side):
+    const path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')) //second check - if there is no file inside the build directory that matches the request, return the index.html file
+    });
+}
 
 const PORT = process.env.PORT || 5000 // setting up a dynamic port for horoku deployment. port number is given only seconds before deployment. otherwise use development port which is 5000
 app.listen(PORT); //express telling node to watch for incoming traffic on port 5000
