@@ -11,6 +11,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
 require('./models/User'); // its is important that this is above the require passport file. first the app creates a model schema and ony then tries to make a model instance
+require('./models/Survey');
 require('./services/passport'); //nothing is exported from passport so we dont need to assign it to a variable
 
 
@@ -34,6 +35,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app); //the require returns a function. we call that function with the app object
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 //runs only on deployment:
 if (process.env.NODE_ENV === 'production') { // NODE_ENV is a variable automatically set by heroku
