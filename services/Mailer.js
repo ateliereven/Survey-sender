@@ -21,7 +21,6 @@ class Mailer {
         const response = await sgMail.send(this.msg) // sends off to sendgrid. sendMultiple instead of send is for sending multiple individual emails to multiple recipients where they don't see each others email addresses. requires personalization.
         return response;
     }
-
 }
 
 module.exports = Mailer;
