@@ -1,3 +1,6 @@
+const _ = require('lodash');
+const { Path } = require('path-parser');
+const { URL } = require('url'); // default module of node helps parse urls
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
@@ -7,9 +10,42 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
-    app.get('/api/surveys/thanks', (req, res) => { // a better way is to make a nice thanks component and route the user with react router
+    app.get('/api/surveys', requireLogin, async (req, res) => { //the user needs to be authemticated to access their surveys
+        const surveys = await Survey.find({ _user: req.user.id }) //fetch all the surveys created by the user. the current user is available at req.user
+            .select({ recipients: false }); //customisung the query. want to exclude the list of recipients. 0 / false is exclude, 1 / true is include
+        res.send(surveys);
+    })
+
+    app.get('/api/surveys/:surveyId/:choice', (req, res) => { // a better way is to make a nice thanks component and route the user with react router
         res.send('Thanks for voting!')
     });
+
+    app.post('/api/surveys/webhooks', (req, res) => {
+        const p = new Path('/api/surveys/:surveyId/:choice') // matching specific id and choice
+        _.chain(req.body) // lodash function that allowas to chain consecutive functions together
+            .map(({ url, email }) => { //destructuring email and url from the event object
+                const match = p.test(new URL(url).pathname); // extracting specific id and choice from the specific url route. if there is no id or choice returns null
+                if (match) {
+                    return { email, surveyId: match.surveyId, choice: match.choice }
+                }
+            })
+            .compact() //removes undefined elements from the array
+            .uniqBy('email', 'surveyId') //removes duplicates
+            .each(({ email, surveyId, choice }) => { //this is aquery sent to mongoDB. destructuring of event object
+                Survey.updateOne({ //this is async, but we don't need async syntax because we don't need to send a response to sendgrid
+                    _id: surveyId, //go through the Survey collection and find one record that has this surveyId
+                    recipients: { // for every survey in  the Survey collection, go through its recipients property - a sub collection.  
+                        $elemMatch: { email: email, responded: false, lastResponded: new Date() } //in the sub collection find an element that matches this email and hasn't responded yet
+                    }
+                }, { //after the single record is found update it with this object
+                    $inc: { [choice]: 1 }, // a mongo eperator. find the choice property and increment by 1
+                    $set: { 'recipients.$.responded': true } // update one of the properties inside the record. inside the recipients collection, update the responded value of the specific recipient found in the query ($) to true
+                }).exec(); //this changes the record directly inside mongo without pulling it out through express
+            })
+            .value(); //this is the result array
+
+        res.send({});
+    })
 
     app.post('/api/surveys', requireLogin/*making sure the user is logged in*/, requireCredits/*making sure the user has credits*/, async (req, res) => {
 

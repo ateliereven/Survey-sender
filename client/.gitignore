@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# unused files
+/src/components/surveys/SurveyForm-w-final-form.js

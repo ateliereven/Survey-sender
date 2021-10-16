@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as actions from '../actions';
@@ -6,15 +6,14 @@ import * as actions from '../actions';
 
 import Header from "./Header";
 import Landing from "./Landing";
-
-const Dashboard = () => <h2>Dashboard</h2>
-const SurveyNew = () => <h2>SurveyNew</h2>
+import Dashboard from "./Dashboard";
+import SurveyNew from "./surveys/SurveyNew";
 
 
 const App = () => {
     const dispatch = useDispatch(); // calling the dispatch function from the redux store
     useEffect(() => {
-dispatch(actions.fetchUser()); // dispatching the action to the reducers
+        dispatch(actions.fetchUser()); // dispatching the action to the reducers
     }, [dispatch])
     return (
         <div className="container">
