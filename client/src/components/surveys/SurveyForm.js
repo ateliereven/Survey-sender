@@ -8,12 +8,12 @@ import formFields from './formFields'
 
 const SurveyForm = (props) => {
     const renderFields = () => {
-        return formFields.map(({ label, name }) => { //map over the array of fields and return 4 separate Field components
-            return <Field key={name} type="text" component={SurveyField} label={label} name={name} /> //need the key property because it's a list
+        return formFields.map(({ label, name }) => { 
+            return <Field key={name} type="text" component={SurveyField} label={label} name={name} />
         })
     };
     const onSubmit = () => {
-        props.onSurveySubmit(); //calls the function from SurveyNew
+        props.onSurveySubmit();
     }
     return (
         <div>
@@ -32,10 +32,10 @@ const SurveyForm = (props) => {
 const validate = (formValues) => {
     const errors = {};
 
-    errors.recipients = validateEmails(formValues.recipients || '') //if no emails have been entered provide an empty string. if there are emails run the function
+    errors.recipients = validateEmails(formValues.recipients || '')
 
-    formFields.forEach(({ name, label }) => { // to get a customised arror message for each field
-        if (!formValues[name]) { // to reference a property/key on the object use square brackets
+    formFields.forEach(({ name, label }) => {
+        if (!formValues[name]) {
             errors[name] = `Please enter ${label.toLowerCase()}`
         }
     })

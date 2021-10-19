@@ -1,6 +1,7 @@
 const keys = require('../../config/keys')
 
-module.exports = (survey) => { //contains all the html for any email we send out
+//contains all the html for any email we send out:
+module.exports = (survey) => {
     return `
         <html>
             <body>

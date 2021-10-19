@@ -7,7 +7,7 @@ import SurveyFormReview from "./SurveyFormReview";
 const SurveyNew = () => {
     const [showFormReview, setShowFormReview] = useState(false);
 const renderContent = () => {
-    if (showFormReview) { // if showFormReview is truthy
+    if (showFormReview) {
         return <SurveyFormReview onCancel={() => { setShowFormReview(false) }} />
     }
     return <SurveyForm onSurveySubmit={() => { setShowFormReview(true)}}/>
@@ -20,6 +20,6 @@ return (
 )
 }
 
-export default reduxForm({ // to clear surveyForm when we navigate out of the page. destroyOnUnmount in true by default
+export default reduxForm({ // to clear surveyForm when we navigate out of the page.
     form: 'surveyForm'
 })(SurveyNew);

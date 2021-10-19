@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import * as actions from '../actions';
 
 const Payments = () => {
-    const dispatch = useDispatch(); // calling the dispatch function from the redux store
-    return ( // generates a payment form
+    const dispatch = useDispatch(); 
+    return (
         <StripeCheckout
-            name="MySender" //name of the app
-            description="5$ for 5 survey credits" //give the user info about what they are paying for
-            amount={500} // defualt currency is USD, amount is in cents
-            token={token => dispatch(actions.handleToken(token))} // token receives a cllback function with the token we receive from strike after the user submits their credit card number
-            stripeKey={process.env.REACT_APP_SRIPE_KEY} //the key is returned when the app builds
+            name="MySender"
+            description="5$ for 5 survey credits"
+            amount={500}
+            token={token => dispatch(actions.handleToken(token))}
+            stripeKey={process.env.REACT_APP_SRIPE_KEY}
         >
             <button className="btn pink flow-text">
                 Add Credits

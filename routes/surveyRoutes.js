@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { Path } = require('path-parser');
-const { URL } = require('url'); // default module of node helps parse urls
+const { URL } = require('url');
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
@@ -10,62 +10,64 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
-    app.get('/api/surveys', requireLogin, async (req, res) => { //the user needs to be authemticated to access their surveys
-        const surveys = await Survey.find({ _user: req.user.id }) //fetch all the surveys created by the user. the current user is available at req.user
-            .select({ recipients: false }); //customisung the query. want to exclude the list of recipients. 0 / false is exclude, 1 / true is include
+    app.get('/api/surveys', requireLogin, async (req, res) => {
+        const surveys = await Survey.find({ _user: req.user.id })
+            .select({ recipients: false });
         res.send(surveys);
     })
 
-    app.get('/api/surveys/:surveyId/:choice', (req, res) => { // a better way is to make a nice thanks component and route the user with react router
+    app.get('/api/surveys/:surveyId/:choice', (req, res) => { // a better way is to make a thanks component and route the user with react router - needs work
         res.send('Thanks for voting!')
     });
 
+    //recording survey vote:
     app.post('/api/surveys/webhooks', (req, res) => {
-        const p = new Path('/api/surveys/:surveyId/:choice') // matching specific id and choice
-        _.chain(req.body) // lodash function that allowas to chain consecutive functions together
-            .map(({ url, email }) => { //destructuring email and url from the event object
-                const match = p.test(new URL(url).pathname); // extracting specific id and choice from the specific url route. if there is no id or choice returns null
+        const p = new Path('/api/surveys/:surveyId/:choice')
+        _.chain(req.body)
+            .map(({ url, email }) => {
+                const match = p.test(new URL(url).pathname);
                 if (match) {
                     return { email, surveyId: match.surveyId, choice: match.choice }
                 }
             })
-            .compact() //removes undefined elements from the array
-            .uniqBy('email', 'surveyId') //removes duplicates
-            .each(({ email, surveyId, choice }) => { //this is aquery sent to mongoDB. destructuring of event object
-                Survey.updateOne({ //this is async, but we don't need async syntax because we don't need to send a response to sendgrid
-                    _id: surveyId, //go through the Survey collection and find one record that has this surveyId
-                    recipients: { // for every survey in  the Survey collection, go through its recipients property - a sub collection.  
-                        $elemMatch: { email: email, responded: false, lastResponded: new Date() } //in the sub collection find an element that matches this email and hasn't responded yet
+            .compact()
+            .uniqBy('email', 'surveyId')
+            .each(({ email, surveyId, choice }) => {
+                Survey.updateOne({
+                    _id: surveyId,
+                    recipients: {
+                        $elemMatch: { email: email, responded: false, lastResponded: new Date() }
                     }
-                }, { //after the single record is found update it with this object
-                    $inc: { [choice]: 1 }, // a mongo eperator. find the choice property and increment by 1
-                    $set: { 'recipients.$.responded': true } // update one of the properties inside the record. inside the recipients collection, update the responded value of the specific recipient found in the query ($) to true
-                }).exec(); //this changes the record directly inside mongo without pulling it out through express
+                }, {
+                    $inc: { [choice]: 1 },
+                    $set: { 'recipients.$.responded': true }
+                }).exec();
             })
-            .value(); //this is the result array
+            .value();
 
         res.send({});
     })
 
-    app.post('/api/surveys', requireLogin/*making sure the user is logged in*/, requireCredits/*making sure the user has credits*/, async (req, res) => {
+    //creating a new survey:
+    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
 
         const { title, subject, body, recipients } = req.body;
 
         const survey = new Survey({
-            title, //ES6 syntax because the key and value are identical
+            title,
             subject,
             body,
-            recipients: recipients.split(',')/*remove commas and return an array of strings*/.map((email) => ({ email: email.trim() }))/*returns an array of objects*/,
-            _user: req.user.id, //the current user's id, generated by mongoDB
+            recipients: recipients.split(',').map((email) => ({ email: email.trim() })),
+            _user: req.user.id,
             dateSent: Date.now()
         });
         try {
             const mailer = new Mailer(survey, surveyTemplate(survey));
             await mailer.send();
-            await survey.save(); // save the survey to the database
+            await survey.save();
             req.user.credits -= 1;
-            const user = await req.user.save();  // save user with new credit balance
-            res.send(user); // send back the user model to the auth reducer, to update the header component
+            const user = await req.user.save();
+            res.send(user);
 
         } catch (error) {
             //console.log(error);

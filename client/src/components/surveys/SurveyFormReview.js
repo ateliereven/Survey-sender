@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-dom';
 import formFields from "./formFields";
 import { submitSurvey } from '../../actions';
 
-const SurveyFormReview = ({ onCancel, history }) => { //history comes from withRouter
-    const formValues = useSelector(state => state.form.surveyForm.values); // getting the state from the store
-    console.log(formValues);
+const SurveyFormReview = ({ onCancel, history }) => {
+    const formValues = useSelector(state => state.form.surveyForm.values);
+    //console.log(formValues);
     const dispatch = useDispatch();
 
     const reviewFields = formFields.map(({ name, label }) => {

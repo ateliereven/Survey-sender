@@ -1,4 +1,4 @@
- const formFields = [ // save the field attributes in an array
+ const formFields = [
     { label: "Survey Title", name: "title" },
     { label: "Subject Line", name: "subject" },
     { label: "Email Body", name: "body" },

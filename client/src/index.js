@@ -7,8 +7,9 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
-import axios from 'axios';  //for testing requests to server before we set up the frontend
-window.axios = axios;
+//for testing requests to server before setting up the frontend
+//import axios from 'axios';  
+//window.axios = axios;
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 

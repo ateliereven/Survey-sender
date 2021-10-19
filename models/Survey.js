@@ -6,10 +6,10 @@ const surveySchema = new Schema({
     title: String,
     body: String,
     subject: String,
-    recipients: [RecipientSchema], //an array containing a list of records that conform with recipientSchema
-    yes: { type: Number, default: 0 }, // counting yes votes
-    no: { type: Number, default: 0 }, // counting no votes
-    _user: {type: Schema.Types.ObjectId, ref: 'User'}, // every survey is going to belong to a paticulae user
+    recipients: [RecipientSchema],
+    yes: { type: Number, default: 0 },
+    no: { type: Number, default: 0 },
+    _user: {type: Schema.Types.ObjectId, ref: 'User'},
     dateSent: Date,
     lastResponded: Date
 });

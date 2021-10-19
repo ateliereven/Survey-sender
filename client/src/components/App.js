@@ -11,9 +11,9 @@ import SurveyNew from "./surveys/SurveyNew";
 
 
 const App = () => {
-    const dispatch = useDispatch(); // calling the dispatch function from the redux store
+    const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(actions.fetchUser()); // dispatching the action to the reducers
+        dispatch(actions.fetchUser());
     }, [dispatch])
     return (
         <div className="container">
