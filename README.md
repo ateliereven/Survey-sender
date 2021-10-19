@@ -4,6 +4,8 @@ A RESTful web app implementing CRUD operations.  The app allows business users t
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+View [Deployment](https://quiet-bayou-08292.herokuapp.com/) 
+
 ## Available Scripts
 
 In the root directory, to run both server and react app:
