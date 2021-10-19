@@ -7,7 +7,7 @@ module.exports = app => {
         const charge = await stripe.charges.create({ //handle the token and reach out the stripe api, then finalize the charge and update the user's nunber of credits
             amount: 500,
             currency: 'usd',
-            description: '5$ for 5 credits', //can be anything
+            description: '5$ for 5 survey credits', //can be anything
             source: req.body.id
         });
         req.user.credits +=5;
