@@ -7,7 +7,7 @@ class Mailer {
         sgMail.setApiKey(keys.sendGridKey)
         this.msg = {
             to: recipients,
-            from: "mysender2021@gmail.com",
+            from: keys.sendGridFromEmail,
             subject: subject,
             html: content,
              //enable click tracking inside the email:

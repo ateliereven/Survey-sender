@@ -11,20 +11,27 @@ const SurveyFormReview = ({ onCancel, history }) => {
     const dispatch = useDispatch();
 
     const reviewFields = formFields.map(({ name, label }) => {
-        return <div key={name}>
-            <label>{label}</label>
-            <div>{formValues[name]}</div>
+        return <div key={name} className="white">
+            <label><h6>{label}</h6></label>
+            <div><b>{formValues[name]}</b></div>
+            <div className="divider"></div>
         </div>
     })
     return (
         <div>
-            <h5>Please comfirm your entries</h5>
+            <div>
+            <h5>Please comfirm your entries:</h5>
             {reviewFields}
-            <button className="yellow darken-3 white-text btn-flat" onClick={onCancel}>Back</button>
-            <button className="green btn-flat white-text right" onClick={() => dispatch(submitSurvey(formValues, history))}>
+            <br/>
+            <button className="amber lighten-1 white-text btn-flat" onClick={onCancel}>
+                <i className="material-icons left">arrow_back</i>
+                Back
+                </button>
+            <button className="green lighten-2 btn-flat white-text right" onClick={() => dispatch(submitSurvey(formValues, history))}>
                 Send Survey
-                <i className="material-icons right">email</i>
+                <i className="material-icons right">send</i>
             </button>
+            </div>
         </div>
     )
 }
