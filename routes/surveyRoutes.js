@@ -10,6 +10,7 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
+    //list of surveys of logged in user:
     app.get('/api/surveys', requireLogin, async (req, res) => {
         const surveys = await Survey.find({ _user: req.user.id })
             .select({ recipients: false });
@@ -17,7 +18,11 @@ module.exports = app => {
     })
 
     app.get('/api/surveys/:surveyId/:choice', (req, res) => { // a better way is to make a thanks component and route the user with react router - needs work
-        res.send('Thanks for voting!')
+        try {
+            res.send('Thanks for voting!')
+        } catch (error) {
+            res.status(500).send(error)
+        }
     });
 
     //recording survey vote:
@@ -32,15 +37,17 @@ module.exports = app => {
             })
             .compact()
             .uniqBy('email', 'surveyId')
+            //updating MongoDB:
             .each(({ email, surveyId, choice }) => {
                 Survey.updateOne({
                     _id: surveyId,
                     recipients: {
-                        $elemMatch: { email: email, responded: false, lastResponded: new Date() }
+                        $elemMatch: { email: email, responded: false }
                     }
                 }, {
                     $inc: { [choice]: 1 },
-                    $set: { 'recipients.$.responded': true }
+                    $set: { 'recipients.$.responded': true },
+                    lastResponded: new Date()
                 }).exec();
             })
             .value();
@@ -75,4 +82,18 @@ module.exports = app => {
             res.status(402).send(error); //unprocessable
         }
     });
+
+    //deleting a survey:
+    app.delete('/api/surveys/:id', requireLogin, async (req, res) => {
+        //console.log(req);
+        try {
+            const survey = await Survey.findByIdAndRemove(req.params.id);
+            const surveys = await Survey.find({ _user: req.user.id })
+                .select({ recipients: false });
+            if (!survey) res.status(404).send("No survey found");
+            res.status(200).send(surveys);
+        } catch (error) {
+            res.status(500).send(error)
+        }
+    })
 };

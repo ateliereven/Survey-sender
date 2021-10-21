@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchSurveys } from "../../actions";
+import { fetchSurveys, deleteSurvey } from "../../actions";
 import { Link } from "react-router-dom";
 
 const SurveyList = () => {
@@ -9,17 +9,18 @@ const SurveyList = () => {
         dispatch(fetchSurveys());
     }, [dispatch])
     const surveys = useSelector(state => state.surveys);
-    //console.log(surveys);
     const renderSurveys = () => {
-        if (!surveys) {
+        if (surveys.length === 0) {
             return (
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
-                        <span className="card-title">No Surveys Yet...</span>
-                        <h5>Create your first survey</h5>
-                        <Link to="/surveys/new" className="right btn-large pink">
-                            <i className="material-icons">add</i>
+                        <span className="right"><Link to="/surveys/new">
+                            <i className="material-icons pink-text medium">add_circle_outline</i>
                         </Link>
+                        </span>
+                        <span className="card-title">No Surveys Yet...</span>
+                        <h6>Create your first survey</h6>
+
                     </div>
                 </div>
             )
@@ -29,13 +30,17 @@ const SurveyList = () => {
                 return (
                     <div className="card blue-grey darken-1" key={survey._id}>
                         <div className="card-content white-text">
+                            <button className="btn-flat right white-text" onClick={() => dispatch(deleteSurvey(survey))}>
+                                <i className="material-icons">delete</i>
+                            </button>
                             <span className="card-title">{survey.title}</span>
+
                             <p>{survey.body}</p>
                             <p className="right">Sent on: {new Date(survey.dateSent).toLocaleDateString()}</p>
                         </div>
                         <div className="card-action">
-                            <a href="#!">Yes: {survey.yes}</a>
-                            <a href="#!">No: {survey.no}</a>
+                            <a href="#!"><i className="material-icons">sentiment_very_satisfied</i> {survey.yes}</a>
+                            <a href="#!"><i className="material-icons">sentiment_very_dissatisfied</i> {survey.no}</a>
                         </div>
                     </div>
                 )
