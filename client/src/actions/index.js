@@ -21,7 +21,7 @@ export const handleToken = (token) => async dispatch => {
 //sends out the submitted survey:
 export const submitSurvey = (formValues, history) => async dispatch => { 
     const response = await axios.post('/api/surveys', formValues);
-    response.error ? alert('Please add credits first') : history.push('/surveys'); //fix code to show an alert
+    history.push('/surveys');
     dispatch({ type: FETCH_USER, payload: response.data }) 
 }
 
@@ -32,7 +32,8 @@ export const fetchSurveys = () => async dispatch => {
 };
 
 //deletes a survey for a specific user:
-export const deleteSurvey = (survey) => async dispatch => {
-    const response = await axios.delete(`/api/surveys/${survey._id}`);
-    dispatch({ type: FETCH_SURVEYS, payload: response.data })
+export const deleteSurvey = (id) => async dispatch => {
+    const response = await axios.delete(`/api/surveys/${id}`);
+    dispatch({ type: FETCH_USER, payload: response.data });
+    
 }

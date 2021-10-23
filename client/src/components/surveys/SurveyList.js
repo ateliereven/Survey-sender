@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchSurveys, deleteSurvey } from "../../actions";
+import { fetchSurveys, /*deleteSurvey*/ } from "../../actions";
 import { Link } from "react-router-dom";
 
 const SurveyList = () => {
@@ -9,6 +9,7 @@ const SurveyList = () => {
         dispatch(fetchSurveys());
     }, [dispatch])
     const surveys = useSelector(state => state.surveys);
+
     const renderSurveys = () => {
         if (surveys.length === 0) {
             return (
@@ -30,13 +31,14 @@ const SurveyList = () => {
                 return (
                     <div className="card blue-grey darken-1" key={survey._id}>
                         <div className="card-content white-text">
-                            <button className="btn-flat right white-text" onClick={() => dispatch(deleteSurvey(survey))}>
+                            <Link to={`/surveys/delete/${survey._id}`} className="right btn-flat white-text">
                                 <i className="material-icons">delete</i>
-                            </button>
+                            </Link>
                             <span className="card-title">{survey.title}</span>
-
                             <p>{survey.body}</p>
                             <p className="right">Sent on: {new Date(survey.dateSent).toLocaleDateString()}</p>
+                            <br />
+                            <p className="right">Last responded on: {new Date(survey.lastResponded).toLocaleDateString()}</p>
                         </div>
                         <div className="card-action">
                             <a href="#!"><i className="material-icons">sentiment_very_satisfied</i> {survey.yes}</a>
@@ -47,6 +49,7 @@ const SurveyList = () => {
             })
         )
     }
+
     return (
         <div>
             {renderSurveys()}
