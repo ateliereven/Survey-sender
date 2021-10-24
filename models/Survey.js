@@ -7,8 +7,11 @@ const surveySchema = new Schema({
     body: String,
     subject: String,
     recipients: [RecipientSchema],
-    yes: { type: Number, default: 0 },
-    no: { type: Number, default: 0 },
+    strongpositive: { type: Number, default: 0 },
+    positive: { type: Number, default: 0 },
+    neutral: { type: Number, default: 0 },
+    negative: { type: Number, default: 0 },
+    strongnegative: { type: Number, default: 0 },
     _user: {type: Schema.Types.ObjectId, ref: 'User'},
     dateSent: Date,
     lastResponded: Date

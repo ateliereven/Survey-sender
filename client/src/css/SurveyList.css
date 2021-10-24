@@ -1,0 +1,23 @@
+.strong-positive {
+    color: #15fd4f !important;
+}
+
+.positive {
+    color: #b2ff59 !important;
+}
+
+.neutral {
+    color: #ffea00 !important;
+}
+
+.negative {
+    color: #ffb310 !important;
+}
+
+.strong-negative {
+    color: #ff4c16 !important;
+}
+
+.strong-positive, .positive, .neutral, .negative, .strong-negative {
+    font-weight: bold;
+}

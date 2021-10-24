@@ -85,11 +85,8 @@ module.exports = app => {
 
     //deleting a survey:
     app.delete('/api/surveys/:id', requireLogin, async (req, res) => {
-        //console.log(req);
         try {
             const survey = await Survey.findByIdAndRemove(req.params.id);
-            //const surveys = await Survey.find({ _user: req.user.id })
-                //.select({ recipients: false });
             const user = await req.user.save();
             if (!survey) res.status(404).send("No survey found");
             res.status(200).send(user);

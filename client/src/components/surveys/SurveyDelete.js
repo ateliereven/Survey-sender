@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams, useHistory } from "react-router-dom";
-//import history from "../../history"
 
 import { deleteSurvey } from "../../actions";
 import Modal from "../Modal";
