@@ -1,54 +1,31 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
-import { Chart } from "chart.js"
-import ChartLabels from 'chartjs-plugin-labels';
-Chart.register(ChartLabels);
+import 'chartjs-plugin-labels'; //this plugin requires older versions of react-chartjs-2 and chart.js (<3)
+
 
 const SurveyResultChart = (props) => {
     const data = {
         datasets: [{
             data: props.data,
-            backgroundColor: [
-                '#15fd4f',
-                '#b2ff59',
-                '#ffea00',
-                '#ffb310',
-                '#ff4c16'
-            ],
+            backgroundColor: props.colors,
             borderWidth: 0
         }]
     }
     const options = {
         maintainAspectRatio: false,
-        /*tooltips: {
-            callbacks: {
-                label: (tooltipItem, data) => {
-                    const dataset = data.datasets[tooltipItem.datasetIndex];
-                    const currentValue = dataset.data[tooltipItem.index];
-                    let total = 0;
-                    for (let i = 0; i < data.datasets.length; i++) {
-                        total += data.datasets[i].data[tooltipItem.index];
-                    }
-                    const percentage = parseFloat((currentValue / total * 100).toFixed(0));
-                    return `${percentage}%`;
-                }
-            },
-            title: (tooltipItem) =>
-                `${tooltipItem[0]?.label}`,
-            color:  '#fff'
-        },*/
-        plugins: { //not displaying
+        plugins: { 
             labels: {
-                display: 'true',
                 render: 'percentage',
-                fontColor: '#fff',
-                fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                fontColor: '#37474f',
+                fontFamily: "Lato,'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                fontStyle: 'bold',
+                fontSize: 12,
                 precision: 0
             }
         }
     }
     return (
-        <div style={{ width: props.width }}>
+        <div style={{ width: `${props.width}px` }}>
             <Pie
                 height={props.height}
                 width={props.width}
