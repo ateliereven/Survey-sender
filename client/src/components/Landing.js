@@ -1,6 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const Landing = (props) => {
+    const auth = useSelector(state => state.auth);
+    const history = useHistory();
+    if (auth) {
+        history.push('/surveys')
+    }
     return <div className="row center container">
         <div className="section">
             <h1>MySender</h1>

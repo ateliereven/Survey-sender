@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import M from "materialize-css/dist/js/materialize.min.js";
+import "materialize-css/dist/css/materialize.min.css";
+
 import Payments from "./Payments";
+import GoogleLogo from "../img/Google__G__Logo.svg";
 
 const Header = (props) => {
     const auth = useSelector(state => state.auth);
@@ -10,32 +14,46 @@ const Header = (props) => {
             case null:
                 return;
             case false:
-                return (<li className="flow-text"><a href="/auth/google"><i className="google icon pink-text" /><b>Login With Google</b></a></li>)
+                return (<li className="flow-text"><a href="/auth/google" className="valign-wrapper"><img src={GoogleLogo} alt='G' style={{ paddingRight: '10px' }} /><b>Login With Google</b></a></li>)
             default:
                 return (
                     <React.Fragment>
-                        <li><Payments /></li>
-                        <li style={{ margin: '0 10px' }}><b>Credits: <span className="pink-text">{auth.credits}</span></b></li>
-                        <li><a href="/api/logout"><i className="google icon" /><b>Logout</b></a></li>
+                        <li>
+                            <Payments />
+                            <b style={{ margin: '0 10px' }} className="badge">Credits: <span className="pink-text">{auth.credits}</span></b>
+                        </li>
+                        <li>
+                            <div>
+                                <a className="flow-text btn-flat blue-grey lighten-2 white-text" style={{ textTransform: "initial", fontSize: '16px' }} href="/api/logout"><b>Logout</b></a>
+                            </div>
+                        </li>
                     </React.Fragment>
                 )
         }
     }
+    useEffect(() => {
+        var elems = document.querySelectorAll('.sidenav');
+        M.Sidenav.init(elems, { edge: "right" });
+    }, []);
     return (
         <div>
-        <nav>
-            <div className="nav-wrapper blue-grey lighten-2">
-                <Link to={auth ? '/surveys' : '/'} className="left brand-logo active">
-                    <i className="material-icons pink-text">dashboard</i>
-                    MYSENDER</Link>
-                <ul className="right">
-                    {renderContent()}
-                </ul>
-            </div>
-        </nav>
-        <br/>
+            <nav>
+                <div className="nav-wrapper blue-grey lighten-2">
+                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active">
+                        <i className="material-icons pink-text">dashboard</i>
+                        MYSENDER</Link>
+                    <a href="#!" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></a>
+                    <ul className="right hide-on-med-and-down">
+                        {renderContent()}
+                    </ul>
+                </div>
+            </nav>
+            <ul className="sidenav sidenav-close" style={{ width: '230px' }} id="mobile-demo">
+                {renderContent()}
+            </ul>
+            <br />
         </div>
-        
+
     )
 }
 

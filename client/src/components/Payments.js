@@ -13,9 +13,9 @@ const Payments = () => {
             token={token => dispatch(actions.handleToken(token))}
             stripeKey={process.env.REACT_APP_SRIPE_KEY}
         >
-            <button className="btn pink flow-text">
+            <div className="btn pink flow-text">
                 Add Credits
-            </button>
+            </div>
         </StripeCheckout>
     )
 };

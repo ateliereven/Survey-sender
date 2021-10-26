@@ -17,17 +17,9 @@ module.exports = app => {
         res.send(surveys);
     })
 
-    app.get('/api/surveys/:surveyId/:choice', (req, res) => { // a better way is to make a thanks component and route the user with react router - needs work
-        try {
-            res.send('Thanks for voting!')
-        } catch (error) {
-            res.status(500).send(error)
-        }
-    });
-
     //recording survey vote:
     app.post('/api/surveys/webhooks', (req, res) => {
-        const p = new Path('/api/surveys/:surveyId/:choice')
+        const p = new Path('/surveys/thanks/:surveyId/:choice')
         _.chain(req.body)
             .map(({ url, email }) => {
                 const match = p.test(new URL(url).pathname);

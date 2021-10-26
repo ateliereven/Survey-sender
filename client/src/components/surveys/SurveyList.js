@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -8,9 +8,11 @@ import SurveyResultChart from "./SurveyResultChart";
 
 const SurveyList = () => {
     const dispatch = useDispatch();
+    const dispatchFetchSurveys = useCallback(() => dispatch(fetchSurveys()), [dispatch]);
     useEffect(() => {
-        dispatch(fetchSurveys());
-    }, [dispatch])
+        dispatchFetchSurveys();
+    }, [dispatchFetchSurveys])
+    
     const surveys = useSelector(state => state.surveys);
 
     const renderSurveys = () => {
