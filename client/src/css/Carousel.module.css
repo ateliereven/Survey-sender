@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+.carousel {
+    position: relative;
+    margin: auto;
+    width: 480px;
+}
+
+.carouselItem {
+    height: 620px;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background-color: #455a64;
+    border-radius: 5px;
+    color: white;
+    padding: 1em;
+    font-size: 1.6rem;
+}
+
+.itemContent {
+    height: 90%;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.itemWithOnlyText {
+    justify-content: center;
+}
+
+.carouselItem h5 {
+    font-style: italic;
+    line-height: 1.5 !important;
+}
+
+.pink {
+    color: #ff4081;
+}
+
+.carouselItem img {
+    width: 70%;
+    padding-top: 5px;
+}
+
+.carouselNav {
+    width: 100%;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+.carouselButton, .carouselButtonSelected {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.carouselButton {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.carouselButtonSelected {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.rightArrow {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    cursor: pointer;
+}
+
+.leftArrow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .carousel {
+        width: 90vw;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .itemContent {
+        width: 80%;
+    }
+    .carouselItem h4 {
+        font-size: 28px;
+    }
+    .carouselItem h5 {
+        font-size: 18px;
+    }
+    .rightArrow {
+        right: -10px;
+    }
+    .leftArrow {
+        left: -10px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    .carouselItem {
+        height: 480px;
+    }
+}
