@@ -36,7 +36,7 @@ const Landing = () => {
         />,
         <CarouselItem
             title="To check it out, try out our free demo account"
-            content={<div><p>Login with: <b>mysurvey.example@gmail.com</b></p>
+            content={<div><p>Login with Google: <b>mysurvey.example@gmail.com</b></p>
                 <p>Enter password: <b>mysurveypass</b></p></div>}
         />
     ]

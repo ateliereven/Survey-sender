@@ -5,7 +5,6 @@ import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
 
 import Payments from "./Payments";
-import GoogleLogo from "../img/Google__G__Logo.svg";
 
 const Header = (props) => {
     const auth = useSelector(state => state.auth);
@@ -14,7 +13,7 @@ const Header = (props) => {
             case null:
                 return;
             case false:
-                return (<li className="flow-text"><a href="/auth/google" className="valign-wrapper"><img src={GoogleLogo} alt='G' style={{ paddingRight: '10px' }} /><b>Login With Google</b></a></li>)
+                return (<li className="flow-text "><Link to="/signin"><b>Sign In</b></Link></li>)
             default:
                 return (
                     <React.Fragment>
@@ -39,7 +38,7 @@ const Header = (props) => {
         <div>
             <nav>
                 <div className="nav-wrapper blue-grey lighten-2">
-                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active">
+                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active" style={{paddingLeft: "10px"}}>
                         <i className="material-icons pink-text">dashboard</i>
                         MYSENDER</Link>
                     <a href="#!" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></a>
