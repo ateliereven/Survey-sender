@@ -13,6 +13,11 @@ module.exports = (app) => {
         passport.authenticate('google'),
         (req, res) => {res.redirect('/surveys')}
     ); 
+    //signing up a new user / signing in an existing user:
+    app.post('/api/login', (req, res) => {
+        const { email, password } = req.body;
+        //complete req and res
+    })
 
     //logging out of the application:
     app.get('/api/logout', (req, res) => {

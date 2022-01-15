@@ -9,7 +9,13 @@ export const fetchUser = () => async dispatch => {
     })
 };
 
-// sends the token received from stripe api to the server:
+//sends out the user's sign-in/sign-up details:
+export const loginUser = (formValues) => async dispatch => {
+    const response = await axios.post('/api/login', formValues);
+    dispatch({ type: FETCH_USER, payload: response.data })
+}
+
+//sends the token received from stripe api to the server:
 export const handleToken = (token) => async dispatch => { 
     const response = await axios.post('/api/stripe', token);
     dispatch({ 

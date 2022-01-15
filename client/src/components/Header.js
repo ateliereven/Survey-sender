@@ -13,7 +13,7 @@ const Header = (props) => {
             case null:
                 return;
             case false:
-                return (<li className="flow-text "><Link to="/signin"><b>Sign In</b></Link></li>)
+                return (<li className="flow-text "><Link to="/login"><b>Sign In</b></Link></li>)
             default:
                 return (
                     <React.Fragment>
