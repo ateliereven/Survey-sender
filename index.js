@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
-require('./models/User'); // its is important that this is above the require passport file.
+require('./models/User'); // its important that this is above the require passport file.
 require('./models/Survey');
 require('./services/passport');
 

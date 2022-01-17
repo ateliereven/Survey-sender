@@ -27,9 +27,8 @@ const AuthForm = (props) => {
         setShowPassword(prevShowPass => !prevShowPass);
     }
     const onSubmit = (formValues) => {
-        console.log(formValues); //returns all the values form the form
+        //console.log(formValues); //returns all the values form the form
         props.onSubmit(formValues); //calls the function from parent component
-        console.log("I was submitted too")
     }
 
     return (
@@ -56,8 +55,14 @@ const AuthForm = (props) => {
 
             render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
+                    <i className="right small material-icons grey-text">mail</i>
                     <Field type="text" component={inputField} label={FIELDS[0].label} name={FIELDS[0].name} />
-                    <i className="right small material-icons grey-text" style={{ cursor: 'pointer' }} onClick={() => handleShowPassword()}>{showPassword ? 'visibility_off' : 'visibility'}</i>
+                    <i
+                        className="right small material-icons grey-text"
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => handleShowPassword()}>
+                        {showPassword ? 'visibility_off' : 'visibility'}
+                    </i>
                     <Field type={showPassword ? "text" : "password"} component={inputField} label={FIELDS[1].label} name={FIELDS[1].name} />
                     {props.isSignup && <Field type={showPassword ? "text" : "password"} component={inputField} label={FIELDS[2].label} name={FIELDS[2].name} />}
                     <button type="submit" className={`${props.isSignup ? 'pink accent-3' : 'teal'} btn white-text`}>

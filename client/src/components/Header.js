@@ -30,6 +30,7 @@ const Header = (props) => {
                 )
         }
     }
+    // for side nav bar open on small screens:
     useEffect(() => {
         var elems = document.querySelectorAll('.sidenav');
         M.Sidenav.init(elems, { edge: "right" });

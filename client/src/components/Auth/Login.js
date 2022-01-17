@@ -1,44 +1,55 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Modal from "../Modal";
 import AuthForm from "./AuthForm";
 import GoogleLogo from "../../img/Google__G__Logo.svg";
-import { loginUser } from "../../actions";
+import { signinUser, signupUser } from "../../actions";
 
+//component has two rendering states - one for sign in and the other for sign up
 const Login = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const [isSignup, setIsSignup] = useState(false);
+    //const auth = useSelector(state => state.auth);
 
-    const auth = useSelector(state => state.auth);
+
+    const [isSignup, setIsSignup] = useState(false);
+    // to toggle isSignup state:
+    const toggleIsSignUp = () => {
+        setIsSignup(prevIsSignup => !prevIsSignup);
+    }
 
     const renderActions = () => {
         return (
             <React.Fragment>
-                <span><b>Don't have an account?</b></span>  <button style={{ marginLeft: '10px' }} className="btn pink accent-3 white-text" onClick={()=>setIsSignup(true)}><b>Sign Up</b></button>
+                <span><b>{!isSignup ? "Don't have an account?" : "Have an account?"}</b></span>
+                <button style={{ marginLeft: '10px' }} className={`btn ${!isSignup ? 'pink accent-3' : 'teal'}  white-text`} onClick={() => toggleIsSignUp()}>
+                    <b>{!isSignup ? 'Sign Up' : 'Sign In'}</b>
+                </button>
                 <Link to='/' style={{ marginLeft: '30px' }} className="btn grey white-text right">Cancel</Link>
             </React.Fragment>
         )
     }
 
     const renderContent = () => {
-        return (            
+        return (
             <div className="row">
-                <ul className="center-align col s6 offset-s3" style={{marginTop: '0', marginBottom: '0'}}>
+                <ul className="center-align col s10 m6 offset-s1 offset-m3" style={{ marginTop: '0', marginBottom: '0' }}>
                     <i className='small material-icons pink-text text-accent-3 valign-center'>account_circle</i>
                     {!isSignup && <li className="card-panel grey lighten-4">
-                        <a href="/auth/google" className="valign-wrapper black-text center-align"><img src={GoogleLogo} alt='G' style={{ paddingRight: '10px' }} />Login With Google</a>
+                        <a href="/auth/google" className="valign-wrapper black-text center-align">
+                            <img src={GoogleLogo} alt='G' style={{ paddingRight: '10px' }} />Login With Google
+                        </a>
                     </li>}
-                        or
+                    {!isSignup && 'or'}
                     <li className="card-panel grey lighten-4 left-align">
                         <AuthForm
                             onSubmit={onSubmit}
                             emailPlaceholder="Please enter the email you signed-up with"
                             passPlaceholder="Please enter the password you signed-up with"
                             isSignup={isSignup}
-                            />
+                        />
                     </li>
                 </ul>
             </div>
@@ -46,19 +57,21 @@ const Login = () => {
     }
 
     const onSubmit = (values) => {
-        console.log("I was submitted");
-        dispatch(loginUser(values));
-        if (auth) history.push('/surveys');
-    
+        if (isSignup) {
+            dispatch(signupUser(values, history));
+        } else {
+            dispatch(signinUser(values, history));
+        }
+
     }
 
     return (
-        //passing details down props to make Modal reusable:
+        //passing details down props to Modal component:
         <Modal
-            title="Log in to Your Account"
+            title={!isSignup ? "Log in to Your Account" : "Create a new Account"}
             content={renderContent()}
-            actions={!isSignup && renderActions()}
-            onDismiss={() => isSignup ? setIsSignup(false) : history.push('/')}
+            actions={renderActions()}
+            onDismiss={() => history.push('/')}
         />
     )
 }
