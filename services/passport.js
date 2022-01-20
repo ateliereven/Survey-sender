@@ -1,6 +1,7 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;
 const keys = require('../config/keys');
 
 const User = mongoose.model('users');
@@ -22,11 +23,46 @@ passport.use(new GoogleStrategy({
     callbackURL: '/auth/google/callback',
     proxy: true
 }, async (accessToken, refreshToken, profile, done) => {
-    const existingUser = await User.findOne({ googleId: profile.id });
-    if (existingUser) {
-        return done(null, existingUser);
+    try{
+        const existingUser = await User.findOne({ googleId: profile.id });
+        if (existingUser) {
+            return done(null, existingUser);
+        }
+        const user = await new User({ googleId: profile.id }).save();
+        done(null, user);
     }
-    const user = await new User({ googleId: profile.id }).save();
-    done(null, user);
+    catch (error) {
+        console.log(error);
+    }
 
 }));
+
+
+//tell passport to read jwt from cookie:
+var cookieExtractor = function(req) {
+    var token = null;
+    if (req && req.headers.cookie) {
+        const cookieArray = req.headers.cookie.split(" ");
+        for (let cookie of cookieArray) {
+            if (cookie.split('=')[0] === 'jwt') {
+                token = cookie.split('=')[1];
+            }
+        }
+    }
+    return token;
+};
+// creating a new instance of JwtStrategy:
+passport.use(new JwtStrategy({
+    jwtFromRequest: cookieExtractor,
+    secretOrKey: keys.jwtKey
+}, (jwt_payload, done) => {
+    console.log("JWT BASED AUTH GETTING CALLED");
+    //console.log(jwt_payload)
+    User.findById(jwt_payload.id, (err, user) => {
+        if (err) return done(err, false);
+        if (user) {
+            return done(null, user);
+        } else return done(null, false);
+    });
+
+}))

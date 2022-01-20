@@ -7,19 +7,30 @@ const keys = require('../config/keys');
 const User = mongoose.model('users');
 
 module.exports = (app) => {
+
+    // Google OAuth //
+
+    // set google auth route:
     app.get(
         '/auth/google',
         passport.authenticate('google', {
-            scope: ['profile', 'email']
+            scope: ['profile', 'email'],
+            failureRedirect: '/',
+            session: false
         })
     );
-
-    //create another router handler for the case when the user is redirected to loaclhosr:5000/auth/google/callback with a code in the url:
+    //create another router handler for the case when the user is redirected to loaclhost:5000/auth/google/callback with a code in the url:
     app.get('/auth/google/callback',
         passport.authenticate('google'),
-        (req, res) => { res.redirect('/surveys') }
+        (req, res) => {
+            const token = jwt.sign({ id: req.user._id }, keys.jwtKey, { expiresIn: '48h' });
+            res.cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" }).redirect('/surveys')
+        }
     );
-    //signing in an existing user:
+
+    // JWT Auth //
+
+    //route for signing in an existing user:
     app.post('/api/signin', async (req, res) => {
         const { email, password } = req.body;
         try {
@@ -30,23 +41,19 @@ module.exports = (app) => {
             const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
             if (!isPasswordCorrect) return res.status(400).send("Incorrect password for entered email");
             // if all checks pass create a web token and send it to the browser:
-            const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, keys.jwtKey, { expiresIn: '30d' });
-
-            //res.send(token);
-            //res.status(200).send(existingUser);
-            //request.headers.authorization = token;
+            const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, keys.jwtKey, { expiresIn: '48h' });
             return res
-            .cookie("access_token", token, {httpOnly: true, secure: process.env.NODE_ENV === "production"}).
-            status(200).json({result: existingUser, token})
+                .cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" }).
+                status(200).json({ result: existingUser, token })
         } catch (error) {
             res.status(500).send("Something went wrong...");
         }
-        //localStorage.setItem... complete
-    })
-    //signing up a new user:
+
+    });
+
+    //route for signing up a new user:
     app.post('/api/signup', async (req, res) => {
         const { email, password, confirmPassword } = req.body;
-
         try {
             //check if the user doesnt already exist:
             const existingUser = await User.findOne({ email });
@@ -56,27 +63,25 @@ module.exports = (app) => {
             // encripting password with bcrypt:
             const hashedPassword = await bcrypt.hash(password, 12); //12 is the level of difficulty of the hash
             //creating a new user:
-            const user = new User({
+            const user = await new User({
                 email,
                 password: hashedPassword
-            });
-            await user.save();
-            //creating a webtoken with jwt:
-            const token = jwt.sign({ email: user.email, id: user._id }, keys.jwtKey, { expiresIn: '30d' });
-            //res.send(token);
-            //res.status(200).send(user);
-            res.status(200).json({ result: user, token })
+            }).save();
+            //creating a webtoken with jwt and sending to the browser:
+            const token = jwt.sign({ email: user.email, id: user._id }, keys.jwtKey, { expiresIn: '48h' });
+            return res
+                .cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" }).
+                status(200).json({ result: user, token });
         } catch (error) {
-            console.log(error);
             res.status(500).send("Something went wrong...");
         }
+    });
 
-    })
+
     //logging out of the application:
     app.get('/api/logout', (req, res) => {
         req.logout(); // takes the cookie and kills the id stored in the cookie
         //res.send(req.user) - this is just for testing the user is actually logged out
-        //localStorage.clear() // delete what was saved to the local storage;
         res.redirect('/');
     });
 
