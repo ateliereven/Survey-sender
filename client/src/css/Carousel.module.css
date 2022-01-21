@@ -2,14 +2,14 @@
 
 .carousel {
     position: relative;
-    margin: auto;
     width: 480px;
 }
 
 .carouselItem {
     height: 620px;
     font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    background-color: #455a64;
+    background-color: rgba(50, 65, 71, 0.85);
+    border: 1px solid white;
     border-radius: 5px;
     color: white;
     padding: 1em;
@@ -90,7 +90,7 @@
     }
 
     .carouselItem {
-        height: calc(97vh - 75px);
+        height: calc(97vh - 95px);
     }
 }
 

@@ -101,7 +101,7 @@ const SurveyList = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             {renderSurveys()}
         </div>
     )

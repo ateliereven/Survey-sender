@@ -7,6 +7,7 @@ import CarouselItem from "./CarouselItem";
 import topup from '../../img/topup.png';
 import surveyForm from '../../img/survey-form.png';
 import surveyCard from '../../img/survey-card.png';
+import customersPic from '../../img/favpng_customer-review-review-site-reputation-management.png'
 
 const Landing = () => {
     const auth = useSelector(state => state.auth);
@@ -44,8 +45,19 @@ const Landing = () => {
     if (auth) {
         history.push('/surveys')
     }
-    return <div>
-        <Carousel items={carouselData} />
+    return <div className="container">
+        <h3 className="pink-text text-accent-2"><i>How well is your product doing? Are your clients satisfied? How are you capturing that information?</i></h3>
+        <div className="flex-row">
+            <div style={{width: '455px'}}>
+                <div className="textbox">
+                    <h5>Whether you're offering a product or a service, getting feedback from your customers will allow you to identify and correct problem areas, and gain an understanding of where you're struggling and succeeding. But how?</h5>
+                    <h5 className="pink-text text-accent-2"><b>Introducing <i>MySender</i></b></h5>
+                </div>
+                <img src={customersPic} width={'100%'} style={{opacity: "0.9"}}/>
+            </div>
+            <Carousel items={carouselData} />
+        </div>
+
     </div>
 };
 

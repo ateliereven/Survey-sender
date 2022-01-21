@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
+const requireJwtAuth = require('../middlewares/requireJwtAuth');
 
 const User = mongoose.model('users');
 
@@ -23,7 +24,8 @@ module.exports = (app) => {
     app.get('/auth/google/callback',
         passport.authenticate('google'),
         (req, res) => {
-            const token = jwt.sign({ id: req.user._id }, keys.jwtKey, { expiresIn: '48h' });
+            console.log(req.user)
+            const token = jwt.sign({ id: req.user._id, googleId: req.user.googleId }, keys.jwtKey, { expiresIn: '48h' });
             res.cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" }).redirect('/surveys')
         }
     );
@@ -77,6 +79,12 @@ module.exports = (app) => {
         }
     });
 
+    //redirect users after login and authenticate:
+    app.get('/auth/login/callback',
+        requireJwtAuth,
+        (req, res) => res.redirect('/surveys') 
+    );
+
 
     //logging out of the application:
     app.get('/api/logout', (req, res) => {
@@ -87,6 +95,7 @@ module.exports = (app) => {
 
     //testing authentication:
     app.get('/api/current_user', (req, res) => {
+        //console.log(req.user)
         res.send(req.user);
     });
 };
