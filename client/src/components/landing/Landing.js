@@ -4,9 +4,9 @@ import { useHistory } from "react-router-dom";
 
 import Carousel from "./Carousel";
 import CarouselItem from "./CarouselItem";
-import topup from '../../img/topup.png';
-import surveyForm from '../../img/survey-form.png';
-import surveyCard from '../../img/survey-card.png';
+import topup from '../../img/topup.jpg';
+import surveyForm from '../../img/survey-form.jpg';
+import surveyCard from '../../img/survey-card.jpg';
 import customersPic from '../../img/favpng_customer-review-review-site-reputation-management.png'
 
 const Landing = () => {
