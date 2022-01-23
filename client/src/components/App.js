@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import ReactGA from 'react-ga';
 import * as actions from '../actions';
 import "../css/App.css";
-
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -13,6 +13,7 @@ import Dashboard from "./Dashboard";
 import SurveyNew from "./surveys/SurveyNew";
 import SurveyDelete from "./surveys/SurveyDelete";
 import Thankyou from "./Thankyou";
+import RouteChangeTracker from "../utils/RouteChangeTracker";
 
 
 const App = () => {
@@ -28,10 +29,26 @@ const App = () => {
         getCurrUrl === "/" ? setIsHome(true) : setIsHome(false)
     }, [isHome])
 
+
+    //google analytics:
+    const TRACKING_ID_1 = "UA-217875414-1";
+    const TRACKING_ID_2 = "G-SLP4RGLEHP";
+    ReactGA.initialize([{ trackingId: TRACKING_ID_1 }, { trackingId: TRACKING_ID_2 }]);
+    ReactGA.event({
+        category: 'User',
+        action: 'Created an Account'
+    });
+    ReactGA.exception({
+        description: 'An error ocurred',
+        fatal: true
+    });
+
+
     return (
         <div className={`app-body ${isHome && "landing"}`}>
             <Router>
                 <div>
+                    <RouteChangeTracker />
                     <Route path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login"]} exact component={Header} />
                     <Route path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login"]} exact component={Footer} />
                     <Route path={["/", "/login"]} exact component={Landing} />

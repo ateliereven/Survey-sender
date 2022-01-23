@@ -6,6 +6,7 @@ import "materialize-css/dist/css/materialize.min.css";
 
 import Payments from "./Payments";
 import PeopleIcon from "../img/people-bw.png";
+import logo from '../img/ms-logo.png'
 
 const Header = (props) => {
     const auth = useSelector(state => state.auth);
@@ -41,8 +42,8 @@ const Header = (props) => {
             <nav className="blue-grey lighten-2" >
                 <div className="container nav-wrapper">
                     <Link to={auth ? '/surveys' : '/'} className="left brand-logo active" style={{paddingLeft: "10px"}}>
-                        <i className="material-icons pink-text text-accent-2">dashboard</i>
-                        MYSENDER</Link>
+                        <img src={logo} style={{ paddingRight: "15px", height: "25px" }}/>
+                        MySender</Link>
                     
                     <a href="#!" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></a>
                     <ul className="right hide-on-med-and-down">
