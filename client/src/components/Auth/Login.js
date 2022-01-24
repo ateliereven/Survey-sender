@@ -11,8 +11,6 @@ import { signinUser, signupUser } from "../../actions";
 const Login = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    //const auth = useSelector(state => state.auth);
-
 
     const [isSignup, setIsSignup] = useState(false);
     // to toggle isSignup state:

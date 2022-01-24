@@ -1,17 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+:root {
+    --width: 480px;
+}
+
 .carousel {
     position: relative;
-    width: 480px;
+    width: var(--width);
+    overflow: hidden;
+    background-color: rgba(50, 65, 71, 0.85);
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
 }
 
 .carouselItem {
     height: 620px;
     font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    background-color: rgba(50, 65, 71, 0.85);
-    border: 1px solid white;
-    border-radius: 5px;
-    color: white;
     padding: 1em;
     font-size: 1.6rem;
 }
@@ -60,6 +65,7 @@
     display: inline-block;
     border-radius: 50%;
     margin: 0 5px;
+    cursor: pointer;
 }
 
 .carouselButton {
@@ -84,9 +90,134 @@
     cursor: pointer;
 }
 
+/* NEXT SLIDE TRANSITION */
+
+.slideInNext {
+    animation: slide-next 0.3s;
+    -webkit-animation: slide-next 0.3s;
+    -moz-animation: slide-next 0.3s;
+    -o-animation: slide-next 0.3s;
+    -ms-animation: slide-next 0.3s;
+}
+
+@keyframes slide-next {
+    from {
+        transform: translateX(var(--width))
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+@-webkit-keyframes slide-next {
+    from {
+        transform: translateX(var(--width))
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+@-moz-keyframes slide-next {
+    from {
+        transform: translateX(var(--width))
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+@-o-keyframes slide-next {
+    from {
+        transform: translateX(var(--width))
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+@-ms-keyframes slide-next {
+    from {
+        transform: translateX(var(--width))
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+/* PREV SLIDE TRANSITION */
+
+.slideInPrev {
+    animation: slide-prev 0.3s;
+    -webkit-animation: slide-prev 0.3s;
+    -moz-animation: slide-prev 0.3s;
+    -o-animation: slide-prev 0.3s;
+    -ms-animation: slide-prev 0.3s;
+}
+
+@keyframes slide-prev {
+    from {
+        transform: translateX(-100vw)
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+@-webkit-keyframes slide-prev {
+    from {
+        transform: translateX(-100vw)
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+@-moz-keyframes slide-prev {
+    from {
+        transform: translateX(-100vw)
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+@-o-keyframes slide-prev {
+    from {
+        transform: translateX(-100vw)
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+@-ms-keyframes slide-prev {
+    from {
+        transform: translateX(-100vw)
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+
+
 @media only screen and (max-width: 600px) {
+    :root {
+        --width: 90vw;
+    }
+
     .carousel {
-        width: 90vw;
+        width: var(--width);
     }
 
     .carouselItem {

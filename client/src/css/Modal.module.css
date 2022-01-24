@@ -18,6 +18,122 @@
     padding-bottom: 0px !important;
 }
 
+.zoom {
+    animation: zoom 0.3s;
+    -webkit-animation: zoom 0.3s;
+    -moz-animation: zoom 0.3s;
+    -o-animation: zoom 0.3s;
+    -ms-animation: zoom 0.3s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@-webkit-keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@-moz-keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@-o-keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@-ms-keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+.zoomOut {
+    animation: zoom-out 0.3s;
+    -webkit-animation: zoom-out 0.3s;
+    -moz-animation: zoom-out 0.3s;
+    -o-animation: zoom-out 0.3s;
+    -ms-animation: zoom-out 0.3s;
+}
+
+@keyframes zoom-out {
+    from {
+        transform: scale(1)
+    }
+
+    to {
+        transform: scale(0)
+    }
+}
+
+@-webkit-keyframes zoom-out {
+    from {
+        transform: scale(1)
+    }
+
+    to {
+        transform: scale(0)
+    }
+}
+
+@-moz-keyframes zoom-out {
+    from {
+        transform: scale(1)
+    }
+
+    to {
+        transform: scale(0)
+    }
+}
+
+@-o-keyframes zoom-out {
+    from {
+        transform: scale(1)
+    }
+
+    to {
+        transform: scale(0)
+    }
+}
+
+@-ms-keyframes zoom-out {
+    from {
+        transform: scale(1)
+    }
+
+    to {
+        transform: scale(0)
+    }
+}
+
 @media only screen and (max-width: 480px) {
     .title {
         font-size: 1.5rem;

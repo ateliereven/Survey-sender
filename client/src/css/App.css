@@ -12,13 +12,19 @@
 
   .app-body {
       position: relative;
+      min-height: calc(100vh - 75px);
   }
 
   .footer {
       bottom: 0;
       position: absolute;
       width: 100%;
+
       background-color: none;
+  }
+
+  .footer-padding {
+      padding-bottom: 75px;
   }
 
   .landing {

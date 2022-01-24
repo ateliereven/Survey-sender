@@ -42,7 +42,7 @@ const Header = (props) => {
             <nav className="blue-grey lighten-2" >
                 <div className="container nav-wrapper">
                     <Link to={auth ? '/surveys' : '/'} className="left brand-logo active" style={{paddingLeft: "10px"}}>
-                        <img src={logo} style={{ paddingRight: "15px", height: "25px" }}/>
+                        <img src={logo} alt="logo" style={{ paddingRight: "15px", height: "25px" }}/>
                         MySender</Link>
                     
                     <a href="#!" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></a>

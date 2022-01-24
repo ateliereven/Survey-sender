@@ -45,7 +45,7 @@ const Landing = () => {
     if (auth) {
         history.push('/surveys')
     }
-    return <div className="container">
+    return <div className="container footer-padding app-body">
         <h3 className="pink-text text-accent-2"><i>How well is your product doing? Are your clients satisfied? How are you capturing that information?</i></h3>
         <div className="flex-row">
             <div style={{width: '455px'}}>
@@ -53,7 +53,7 @@ const Landing = () => {
                     <h5>Whether you're offering a product or a service, getting feedback from your customers will allow you to identify and correct problem areas, and gain an understanding of where you're struggling and succeeding. But how?</h5>
                     <h5 className="pink-text text-accent-2"><b>Introducing <i>MySender</i></b></h5>
                 </div>
-                <img src={customersPic} width={'100%'} style={{opacity: "0.9"}}/>
+                <img src={customersPic} alt="people" width={'100%'} style={{opacity: "0.9"}}/>
             </div>
             <Carousel items={carouselData} />
         </div>

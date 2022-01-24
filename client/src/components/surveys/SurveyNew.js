@@ -8,13 +8,13 @@ const SurveyNew = () => {
     const [showFormReview, setShowFormReview] = useState(false);
 const renderContent = () => {
     if (showFormReview) {
-        return <SurveyFormReview onCancel={() => { setShowFormReview(false) }} />
+        return <SurveyFormReview onCancel={() => { setShowFormReview(false) }}/>
     }
-    return <SurveyForm onSurveySubmit={() => { setShowFormReview(true)}}/>
+    return <SurveyForm onSurveySubmit={() => { setShowFormReview(true) }}/>
 }
     
 return (
-    <div className="container">
+    <div className="container footer-padding">
         {renderContent()}
     </div>
 )
