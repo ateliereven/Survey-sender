@@ -1,6 +1,6 @@
 # MySender App
 
-A RESTful web app implementing CRUD operations.  The app allows business users to create and send feedback-surveys to their clients, featuring OAuth, payments and emailing services. Frontend written in React, using React-router, Redux, Redux-form, Materialize CSS. Backend written in JavaScript, hosted in Node.js and express, using MongoDB and Mongoose.
+A RESTful MERN web app that allows business users to create and send feedback-surveys to their clients, and receive data on their responses. Featuring OAuth (JWT, Google), payments (Stripe) and emailing services (Sendgrid). Frontend written with React.js, using React-router, Redux, Redux-form, Charts.js, Materialize CSS. Backend written in JavaScript, hosted in Node.js and express. Data is stored and managed in MongoDB via Mongoose.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
