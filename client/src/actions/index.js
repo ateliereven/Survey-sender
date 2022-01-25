@@ -15,7 +15,7 @@ export const signinUser = (formValues, history) => async dispatch => {
         const response = await axios.post('/api/signin', formValues);
         history.push('/surveys');
         dispatch({ type: FETCH_USER, payload: response.data });
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     }  
 }

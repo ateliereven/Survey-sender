@@ -24,7 +24,6 @@ module.exports = (app) => {
     app.get('/auth/google/callback',
         passport.authenticate('google'),
         (req, res) => {
-            console.log(req.user)
             const token = jwt.sign({ id: req.user._id, googleId: req.user.googleId }, keys.jwtKey, { expiresIn: '48h' });
             res.cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" }).redirect('/surveys')
         }
@@ -79,13 +78,6 @@ module.exports = (app) => {
         }
     });
 
-    //redirect users after login and authenticate:
-    app.get('/auth/login/callback',
-        requireJwtAuth,
-        (req, res) => res.redirect('/surveys') 
-    );
-
-
     //logging out of the application:
     app.get('/api/logout', (req, res) => {
         req.logout(); // takes the cookie and kills the id stored in the cookie
@@ -98,4 +90,13 @@ module.exports = (app) => {
         //console.log(req.user)
         res.send(req.user);
     });
+
+//logging in demo user:
+    app.post('/api/current_user', async (req, res) => {
+        console.log(req.body)
+        const { _id } = req.body;
+        const existingUser = await User.findOne({ _id });
+        res.send(existingUser);
+    });
+
 };

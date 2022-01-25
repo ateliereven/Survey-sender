@@ -8,7 +8,8 @@ import "../css/App.css";
 import Header from "./Header";
 import Footer from "./Footer";
 import Landing from "./landing/Landing";
-import Login from "./Auth/Login";
+import Login from "./auth/Login";
+import Demo from "./auth/Demo";
 import Dashboard from "./Dashboard";
 import SurveyNew from "./surveys/SurveyNew";
 import SurveyDelete from "./surveys/SurveyDelete";
@@ -49,10 +50,11 @@ const App = () => {
             <Router>
                 <div>
                     <RouteChangeTracker />
-                    <Route path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login"]} exact component={Header} />
-                    <Route path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login"]} exact component={Footer} />
+                    <Route path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login", "/login/demo"]} exact component={Header} />
+                    <Route path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login", "/login/demo"]} exact component={Footer} />
                     <Route path={["/", "/login"]} exact component={Landing} />
                     <Route path="/login" exact component={Login} />
+                    <Route path="/login/demo" exact component={Demo} />
                     <Route path={["/surveys", "/surveys/delete/:id"]} exact component={Dashboard} />
                     <Route path="/surveys/new" component={SurveyNew} />
                     <Route path="/surveys/delete/:id" exact component={SurveyDelete} />

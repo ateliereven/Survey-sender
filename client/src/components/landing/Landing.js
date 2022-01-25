@@ -7,7 +7,8 @@ import CarouselItem from "./CarouselItem";
 import topup from '../../img/topup.jpg';
 import surveyForm from '../../img/survey-form.jpg';
 import surveyCard from '../../img/survey-card.jpg';
-import customersPic from '../../img/favpng_customer-review-review-site-reputation-management.png'
+import customersPic from '../../img/favpng_customer-review-review-site-reputation-management.png';
+import GoogleLogo from "../../img/Google__G__Logo.svg";
 
 const Landing = () => {
     const auth = useSelector(state => state.auth);
@@ -37,28 +38,37 @@ const Landing = () => {
         />,
         <CarouselItem
             title="To check it out, try out our free demo account"
-            content={<div><p>Login with Google: <b>mysurvey.example@gmail.com</b></p>
-                <p>Enter password: <b>mysurveypass</b></p></div>}
+            content={<div>
+                <p>Login with Google: <b>mysurvey.example@gmail.com</b></p>
+                <p>Enter password: <b>mysurveypass</b></p>
+                <button className="btn pink flow-text ">
+                    <a href="/auth/google" className="valign-wrapper center-align white-text">
+                        Go to Google
+                    </a>
+                </button>
+                </div>}
         />
     ]
 
     if (auth) {
         history.push('/surveys')
-    }
-    return <div className="container footer-padding app-body">
-        <h3 className="pink-text text-accent-2"><i>How well is your product doing? Are your clients satisfied? How are you capturing that information?</i></h3>
-        <div className="flex-row">
-            <div style={{width: '455px'}}>
-                <div className="textbox">
-                    <h5>Whether you're offering a product or a service, getting feedback from your customers will allow you to identify and correct problem areas, and gain an understanding of where you're struggling and succeeding. But how?</h5>
-                    <h5 className="pink-text text-accent-2"><b>Introducing <i>MySender</i></b></h5>
+    } else {
+        return <div className="container footer-padding app-body">
+            <h3 className="pink-text text-accent-2"><i>How well is your product doing? Are your clients satisfied? How are you capturing that information?</i></h3>
+            <div className="flex-row">
+                <div style={{ width: '455px' }}>
+                    <div className="textbox">
+                        <h5>Whether you're offering a product or a service, getting feedback from your customers will allow you to identify and correct problem areas, and gain an understanding of where you're struggling and succeeding. But how?</h5>
+                        <h5 className="pink-text text-accent-2"><b>Introducing <i>MySender</i></b></h5>
+                    </div>
+                    <img src={customersPic} alt="people" width={'100%'} style={{ opacity: "0.9" }} />
                 </div>
-                <img src={customersPic} alt="people" width={'100%'} style={{opacity: "0.9"}}/>
+                <Carousel items={carouselData} />
             </div>
-            <Carousel items={carouselData} />
-        </div>
 
-    </div>
+        </div>
+    }
+ 
 };
 
 export default Landing;

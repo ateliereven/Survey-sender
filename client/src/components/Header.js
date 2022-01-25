@@ -15,7 +15,14 @@ const Header = (props) => {
             case null:
                 return;
             case false:
-                return (<li><Link to="/login"><b className="white-text">Sign In</b></Link></li>)
+                return (
+                    <>
+                        <li><Link to="/login/demo"><div className="btn pink flow-text">
+                            Try Demo
+                        </div></Link></li>
+                        <li><Link to="/login"><b className="white-text">Sign In</b></Link></li>
+                    </>
+                )
             default:
                 return (
                     <React.Fragment>
@@ -41,10 +48,10 @@ const Header = (props) => {
         <div className="navbar-fixed" style={{ marginBottom: '10px' }}>
             <nav className="blue-grey lighten-2" >
                 <div className="container nav-wrapper">
-                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active" style={{paddingLeft: "10px"}}>
-                        <img src={logo} alt="logo" style={{ paddingRight: "15px", height: "25px" }}/>
+                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active" style={{ paddingLeft: "10px" }}>
+                        <img src={logo} alt="logo" style={{ paddingRight: "15px", height: "25px" }} />
                         MySender</Link>
-                    
+
                     <a href="#!" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></a>
                     <ul className="right hide-on-med-and-down">
                         <li><img src={PeopleIcon} alt='people-icon' style={{ paddingTop: "2px" }} height={'60px'} className="center brand-logo valign-center" /></li>
