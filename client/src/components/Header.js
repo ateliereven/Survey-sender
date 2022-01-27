@@ -17,10 +17,14 @@ const Header = (props) => {
             case false:
                 return (
                     <>
-                        <li><Link to="/login/demo"><div className="btn pink flow-text">
+                        <li><Link to="/login/demo" className="btn pink flow-text white-text">
                             Try Demo
-                        </div></Link></li>
-                        <li><Link to="/login"><b className="white-text">Sign In</b></Link></li>
+                        </Link></li>
+                        <li>
+                            <Link to="/login" className="btn-flat blue-grey lighten-2 white-text center link-style">
+                                <b>Sign In</b>
+                            </Link>
+                        </li>
                     </>
                 )
             default:
@@ -32,7 +36,9 @@ const Header = (props) => {
                         </li>
                         <li>
                             <div>
-                                <a className="flow-text btn-flat blue-grey lighten-2 white-text" style={{ textTransform: "initial", fontSize: '16px' }} href="/api/logout"><b>Logout</b></a>
+                                <a href="/api/logout" className="btn-flat blue-grey lighten-2 white-text link-style">
+                                    <b>Logout</b>
+                                </a>
                             </div>
                         </li>
                     </React.Fragment>
@@ -45,7 +51,7 @@ const Header = (props) => {
         M.Sidenav.init(elems, { edge: "right" });
     }, []);
     return (
-        <div className="navbar-fixed" style={{ marginBottom: '10px' }}>
+        <div className="navbar-fixed header">
             <nav className="blue-grey lighten-2" >
                 <div className="container nav-wrapper">
                     <Link to={auth ? '/surveys' : '/'} className="left brand-logo active" style={{ paddingLeft: "10px" }}>

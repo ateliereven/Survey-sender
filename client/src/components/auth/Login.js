@@ -33,7 +33,7 @@ const Login = () => {
     const renderContent = () => {
         return (
             <div className="row">
-                <ul className="center-align col s10 m6 offset-s1 offset-m3" style={{ marginTop: '0', marginBottom: '0' }}>
+                <ul className="center-align col s12 m6 offset-m3" style={{ marginTop: '0', marginBottom: '0' }}>
                     <i className='small material-icons pink-text text-accent-3 valign-center'>account_circle</i>
                     {!isSignup && <li className="card-panel grey lighten-4">
                         <a href="/auth/google" className="valign-wrapper black-text center-align">

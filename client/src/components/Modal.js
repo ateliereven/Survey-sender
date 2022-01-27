@@ -25,7 +25,7 @@ const Modal = props => {
     }
 
     return ReactDOM.createPortal(
-        <div onClick={() => { handleClick() }} className={`${modalStyles.dimBackgroud} ui dimmer visible active`}>
+        <div onClick={() => { handleClick() }} className={`${modalStyles.modalBackgroud} ui dimmer visible active`}>
             <div
                 onClick={(e) => { e.stopPropagation(); }}
                 className={`${modalStyles.position} ui standard  active modal modal-content ${isOpen ? modalStyles.zoom : modalStyles.zoomOut}`}

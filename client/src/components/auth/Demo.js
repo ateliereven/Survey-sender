@@ -10,7 +10,7 @@ const Demo = () => {
     const renderContent = () => {
         return (
             <div className="row">
-                <div className="col s10 m6 offset-s1 offset-m3">
+                <div className="col s12 m6 offset-s0 offset-m3">
                     <div className="card-panel grey lighten-4">
                         <p>Enter email: <b>mysurvey.example@gmail.com</b></p>
                         <p>Enter password: <b>mysurveypass</b></p>

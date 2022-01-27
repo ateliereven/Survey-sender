@@ -8,7 +8,6 @@ import topup from '../../img/topup.jpg';
 import surveyForm from '../../img/survey-form.jpg';
 import surveyCard from '../../img/survey-card.jpg';
 import customersPic from '../../img/favpng_customer-review-review-site-reputation-management.png';
-import GoogleLogo from "../../img/Google__G__Logo.svg";
 
 const Landing = () => {
     const auth = useSelector(state => state.auth);
