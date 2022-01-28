@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ReactGA from 'react-ga';
@@ -23,13 +23,6 @@ const App = () => {
         dispatch(actions.fetchUser());
     }, [dispatch])
 
-    // setting a background image class to the "/" path:
-    const [isHome, setIsHome] = useState(true);
-    useEffect(() => {
-        const getCurrUrl = window.location.pathname;
-        getCurrUrl === "/" ? setIsHome(true) : setIsHome(false)
-    }, [isHome])
-
 
     //google analytics:
     const TRACKING_ID_1 = "UA-217875414-1";
@@ -46,7 +39,7 @@ const App = () => {
 
 
     return (
-        <div className={`app-body ${isHome && "landing"}`}>
+        <div className={`app-body`}>
             <Router>
                 <div>
                     <RouteChangeTracker />

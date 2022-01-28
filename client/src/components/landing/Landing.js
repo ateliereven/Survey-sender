@@ -4,10 +4,11 @@ import { useHistory } from "react-router-dom";
 
 import Carousel from "./Carousel";
 import CarouselItem from "./CarouselItem";
-import topup from '../../img/topup.jpg';
-import surveyForm from '../../img/survey-form.jpg';
-import surveyCard from '../../img/survey-card.jpg';
-import customersPic from '../../img/favpng_customer-review-review-site-reputation-management.png';
+import topup from '../../img/topup.svg';
+import surveyForm from '../../img/survey-form.svg';
+import surveyCard from '../../img/survey-card.svg';
+import illustration from '../../img/undraw_feedback_re_urmj.svg';
+import email from '../../img/email.png';
 
 const Landing = () => {
     const auth = useSelector(state => state.auth);
@@ -45,29 +46,46 @@ const Landing = () => {
                         Go to Google
                     </a>
                 </button>
-                </div>}
+            </div>}
         />
     ]
 
     if (auth) {
         history.push('/surveys')
     } else {
-        return <div className="container footer-padding app-body">
-            <h3 className="pink-text text-accent-2"><i>How well is your product doing? Are your clients satisfied? How are you capturing that information?</i></h3>
-            <div className="flex-row">
-                <div style={{ width: '455px' }}>
+        return <div className="container app-body">
+
+            <section className="flex-row">
+                <div className="flex-row" style={{alignItems: 'flex-start'}} >
+                <div className="flex-column width-55">
                     <div className="textbox">
-                        <h5>Whether you're offering a product or a service, getting feedback from your customers will allow you to identify and correct problem areas, and gain an understanding of where you're struggling and succeeding. But how?</h5>
-                        <h5 className="pink-text text-accent-2"><b>Introducing <i>MySender</i></b></h5>
+                        <h4 className="pink-text text-accent-2"><i>How well is your product doing? Are your clients satisfied? How are you capturing that information?</i></h4>
+                        <h6>Whether you're offering a product or a service, harnessing customer insights will allow you to identify and correct problem areas, and gain an understanding of where you're struggling and succeeding. But how?</h6>
+                        <h6 className="pink-text text-accent-2"><b>Introducing <i>MySender</i></b></h6>
                     </div>
-                    <img src={customersPic} alt="people" width={'100%'} style={{ opacity: "0.9" }} />
+                    <img id="illustration" src={illustration} alt="people" className="width-55" />
                 </div>
-                <Carousel items={carouselData} />
-            </div>
+                <Carousel items={carouselData}/>
+                </div>
+            </section>
+
+            <section id="product">
+                <h6 className="blue-grey-text text-lighten-2"><b>Product</b></h6>
+                <div className="flex-row" style={{ alignItems: 'flex-start' }}>
+                    <div className=" width-55">
+                    <div className="textbox">
+                        <h4 className="pink-text text-accent-2"><i>Send one-click email surveys</i></h4>
+                        <h6>Find out how people feel, what they like, or what's stopping them from using your product more.</h6>
+                        <h6>MySender's survey emails track the customers' response, and the results are available to you directly on your dashboard.</h6>
+                    </div>
+                    </div>
+                    <img src={email} alt="email" className="width-45"/>
+                </div>
+            </section>
 
         </div>
     }
- 
+
 };
 
 export default Landing;

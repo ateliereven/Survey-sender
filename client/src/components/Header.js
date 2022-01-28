@@ -5,7 +5,7 @@ import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
 
 import Payments from "./Payments";
-import PeopleIcon from "../img/people-bw.png";
+import opinion from '../img/undraw_opinion_re_jix4.svg'
 import logo from '../img/ms-logo.png'
 
 const Header = (props) => {
@@ -17,6 +17,7 @@ const Header = (props) => {
             case false:
                 return (
                     <>
+                        <li><a href="#product" className="btn-flat blue-grey lighten-2 white-text center link-style"><b>Product</b></a></li>
                         <li><Link to="/login/demo" className="btn pink flow-text white-text">
                             Try Demo
                         </Link></li>
@@ -54,13 +55,12 @@ const Header = (props) => {
         <div className="navbar-fixed header">
             <nav className="blue-grey lighten-2" >
                 <div className="container nav-wrapper">
-                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active" style={{ paddingLeft: "10px" }}>
+                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active left" style={{ paddingLeft: "10px" }}>
                         <img src={logo} alt="logo" style={{ paddingRight: "15px", height: "25px" }} />
                         MySender</Link>
-
                     <a href="#!" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></a>
                     <ul className="right hide-on-med-and-down">
-                        <li><img src={PeopleIcon} alt='people-icon' style={{ paddingTop: "2px" }} height={'60px'} className="center brand-logo valign-center" /></li>
+                        <li><img src={opinion} alt='opinion-icon' style={{ paddingTop: "2px" }} height={'60px'} className="center brand-logo valign-center" /></li>
                         {renderContent()}
                     </ul>
                 </div>

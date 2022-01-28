@@ -1,6 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
+import thankyou from "../img/undraw_super_thank_you_re_f8bo.svg"
+
 const Thankyou = () => {
     const { choice } = useParams();
     console.log(choice);
@@ -17,6 +19,7 @@ const Thankyou = () => {
         <div className="section"></div>
         <h1 className="pink-text text-accent-2">Thanks for voting!</h1>
         {onFeedback()}
+        <img src={thankyou} alt="people" width={'50%'} style={{marginTop: '4%'}}/>
     </div>
 }
 
