@@ -4,9 +4,26 @@ A RESTful MERN web app that allows business users to create and send feedback-su
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-View [Deployment](https://quiet-bayou-08292.herokuapp.com/) 
+### View [Deployment](https://quiet-bayou-08292.herokuapp.com/) 
 
-## Available Scripts
+## Available Scripts & Prerequisites:
+
+1. In the root directory, install package dependencies:
+    ### `npm i`
+
+2. The app requires API keys for the following services:
+
+    Google Auth: [https://console.cloud.google.com]
+  
+    Stripe: [https://www.stripe.com]
+  
+    Sendgrid: [https://signup.sendgrid.com]
+  
+    MongoDB Atlas: [https://www.mongodb.com/cloud/atlas]
+
+    **Insert required keys to the dev.js file in the config directory**
+
+#
 
 In the root directory, to run both server and react app:
 
@@ -18,17 +35,18 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `nodemon index.js`
 
-Runs the server only.
+To run the server only:
+
+### `npm run server`
 
 
-In the client directory, you can run:
+In the root directory, to run the client only:
+### `npm run client`
+Alternatively, in the client directory:
+### `npm run start`
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In the client directory, you can also run:
 
 ### `npm run build`
 
@@ -38,7 +56,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+See the React documentation section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
 
@@ -48,11 +66,6 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments. 
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 
