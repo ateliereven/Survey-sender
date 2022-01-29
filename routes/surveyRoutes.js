@@ -81,8 +81,11 @@ module.exports = app => {
         try {
             const survey = await Survey.findByIdAndRemove(req.params.id);
             const user = await req.user.save();
+            const surveys = await Survey.find({ _user: req.user.id })
+                .select({ recipients: false });
+            res.send(surveys);
             if (!survey) res.status(404).send("No survey found");
-            res.status(200).send(user);
+            res.status(200).send(surveys);
         } catch (error) {
             res.status(500).send(error)
         }

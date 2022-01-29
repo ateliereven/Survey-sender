@@ -12,11 +12,11 @@ const SurveyFormReview = ({ onCancel, history }) => {
     const dispatch = useDispatch();
 
     const reviewFields = formFields.map(({ name, label }) => {
-        return <div key={name} className="white">
-            <label><h6>{label}</h6></label>
-            <div><b>{formValues[name]}</b></div>
+        return <div key={name} style={{ paddingBottom: '1em' }}>
+            <label>{label}</label>
+            <h6><i>{formValues[name]}</i></h6>
             <div className="divider"></div>
-        </div>
+        </div >
     })
     const sendSurvey = () => {
         if (numOfCredits === 0) {
@@ -25,11 +25,13 @@ const SurveyFormReview = ({ onCancel, history }) => {
         return dispatch(submitSurvey(formValues, history))
     }
     return (
-        <div>
+        <div className="container">
             <div>
-            <h5>Please comfirm your entries:</h5>
+            <h6>Please confirm your entries:</h6>
+                <div className="card-panel white">
             {reviewFields}
-            <br/>
+                </div>
+            
             <button className="amber lighten-1 white-text btn-flat" onClick={onCancel}>
                 <i className="material-icons left">arrow_back</i>
                 Back
@@ -39,6 +41,7 @@ const SurveyFormReview = ({ onCancel, history }) => {
                 <i className="material-icons right">send</i>
             </button>
             </div>
+            <br />
         </div>
     )
 }

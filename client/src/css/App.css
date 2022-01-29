@@ -42,7 +42,7 @@
   }
 
   section {
-      min-height: calc(100vh - 64px);
+      min-height: calc(100vh - 80px);
   }
 
   #product {
@@ -101,6 +101,11 @@
       margin-bottom: 2em;
   }
 
+  form label, label {
+      font-size: 15px;
+      color: #455a64;
+  }
+
   @media only screen and (max-width: 1300px) {
       .width-55 {
           width: 42%;
@@ -138,6 +143,10 @@
 
       .flex-row img {
           margin-bottom: 3.5em;
+      }
+
+      form label, label {
+          font-size: 13px;
       }
 
   }

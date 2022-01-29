@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { FETCH_USER, FETCH_SURVEYS } from './types';
 
+//fetches the user model from the database:
 export const fetchUser = () => async dispatch => {
     const response = await axios.get('/api/current_user');
     dispatch({
@@ -56,6 +57,6 @@ export const fetchSurveys = () => async dispatch => {
 //deletes a survey for a specific user:
 export const deleteSurvey = (id) => async dispatch => {
     const response = await axios.delete(`/api/surveys/${id}`);
-    dispatch({ type: FETCH_USER, payload: response.data });
+    dispatch({ type: FETCH_SURVEYS, payload: response.data });
     
 }

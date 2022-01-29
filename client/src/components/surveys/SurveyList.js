@@ -6,7 +6,7 @@ import { fetchSurveys } from "../../actions";
 import SurveyCard from "./SurveyCard";
 import SurveyResultChart from "./SurveyResultChart";
 
-const SurveyList = () => {
+const SurveyList = ({ sortSelection }) => {
     const dispatch = useDispatch();
     const dispatchFetchSurveys = useCallback(() => dispatch(fetchSurveys()), [dispatch]);
     useEffect(() => {
@@ -101,7 +101,7 @@ const SurveyList = () => {
     }
 
     return (
-        <div className="container footer-padding">
+        <div>
             {renderSurveys()}
         </div>
     )

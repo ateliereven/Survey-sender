@@ -9,15 +9,19 @@ import formFields from './formFields'
 const SurveyForm = (props) => {
     const renderFields = () => {
         return formFields.map(({ label, name }) => { 
-            return <Field key={name} type="text" component={SurveyField} label={label} name={name} />
+            return (
+            <div className="input-field pink-text">
+            <Field key={name} type="text" component={SurveyField} label={label} name={name} />
+                </div>
+                )
         })
     };
     const onSubmit = () => {
         props.onSurveySubmit();
     }
     return (
-        <div>
-            <form onSubmit={props.handleSubmit(onSubmit)}>
+        <div className="container">
+            <form onSubmit={props.handleSubmit(onSubmit)} className="pink-text">
                 {renderFields()}
                 <Link to="/surveys" className="red btn-flat white-text">Cancel</Link>
                 <button className="teal btn-flat right white-text">
