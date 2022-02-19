@@ -2,9 +2,7 @@
 
 A RESTful MERN web app that allows business users to create and send feedback-surveys to their clients, and receive data on their responses. Featuring OAuth (JWT, Google), payments (Stripe) and emailing services (Sendgrid). Frontend written with React.js, using React-router, Redux, Redux-form, Charts.js, Materialize CSS. Backend written in JavaScript, hosted in Node.js and express. Data is stored and managed in MongoDB via Mongoose.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-### View [Deployment](https://quiet-bayou-08292.herokuapp.com/) 
+### View [Deployment](https://my-sender.herokuapp.com/) 
 
 ![Alt text](client/src/img/my-sender.png?raw=true "MySender Home Page")
 
