@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### View [Deployment](https://quiet-bayou-08292.herokuapp.com/) 
 
+![Alt text](client/src/img/my-sender.png?raw=true "MySender Home Page")
+
 ## Available Scripts & Prerequisites:
 
 1. In the root directory, install package dependencies:
