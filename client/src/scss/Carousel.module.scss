@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import './index.scss';
+@import "config";
 
 :root {
     --width: 45%;
@@ -7,8 +9,9 @@
 .carousel {
     position: relative;
     width: var(--width);
+    height: inherit !important;
     overflow: hidden;
-    background-color: rgba(50, 65, 71, 0.85);
+    background-color: $secondary-color-dark;
     border: 1px solid white;
     border-radius: 5px;
     color: white;
@@ -16,9 +19,24 @@
 
 .carouselItem {
     height: 620px;
-    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-family: $secondary-font-stack;
     padding: 1em;
     font-size: 1.6rem;
+
+    h5 {
+        font-style: italic;
+        line-height: 1.5 !important;
+        
+    }
+
+    h4 {
+        background-color:unset !important;
+    }
+
+    img {
+        width: 70%;
+        padding-top: 5px;
+    }
 }
 
 .itemContent {
@@ -36,18 +54,8 @@
     justify-content: center;
 }
 
-.carouselItem h5 {
-    font-style: italic;
-    line-height: 1.5 !important;
-}
-
 .pink {
-    color: #ff4081;
-}
-
-.carouselItem img {
-    width: 70%;
-    padding-top: 5px;
+    color: $primary-color;
 }
 
 .carouselNav {
@@ -59,92 +67,52 @@
     text-align: center;
 }
 
-.carouselButton, .carouselButtonSelected {
-    width: 12px;
-    height: 12px;
-    display: inline-block;
-    border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
+%buttons {
+width: 12px;
+height: 12px;
+display: inline-block;
+border-radius: 50%;
+margin: 0 5px;
+cursor: pointer;
 }
 
 .carouselButton {
+    @extend %buttons;
     background: rgba(255, 255, 255, 0.2);
 }
 
 .carouselButtonSelected {
+    @extend %buttons;
     background: rgba(255, 255, 255, 0.8);
 }
 
+%arrows {
+position: absolute;
+top: 50%;
+cursor: pointer;
+}
+
 .rightArrow {
-    position: absolute;
-    top: 50%;
+    @extend %arrows;
     right: 0;
-    cursor: pointer;
 }
 
 .leftArrow {
-    position: absolute;
-    top: 50%;
+    @extend %arrows;
     left: 0;
-    cursor: pointer;
 }
 
 /* NEXT SLIDE TRANSITION */
 
 .slideInNext {
-    animation: slide-next 0.3s;
-    -webkit-animation: slide-next 0.3s;
-    -moz-animation: slide-next 0.3s;
-    -o-animation: slide-next 0.3s;
-    -ms-animation: slide-next 0.3s;
+    @include animation(slide-next, 0s, 0.3s);
 }
 
-@keyframes slide-next {
+@include keyframe(slide-next) {
     from {
         transform: translateX(var(--width))
     }
-
-    to {
-        transform: translateX(0)
-    }
-}
-
-@-webkit-keyframes slide-next {
-    from {
-        transform: translateX(var(--width))
-    }
-
-    to {
-        transform: translateX(0)
-    }
-}
-
-@-moz-keyframes slide-next {
-    from {
-        transform: translateX(var(--width))
-    }
-
-    to {
-        transform: translateX(0)
-    }
-}
-
-@-o-keyframes slide-next {
-    from {
-        transform: translateX(var(--width))
-    }
-
-    to {
-        transform: translateX(0)
-    }
-}
-
-@-ms-keyframes slide-next {
-    from {
-        transform: translateX(var(--width))
-    }
-
+    
     to {
         transform: translateX(0)
     }
@@ -153,54 +121,10 @@
 /* PREV SLIDE TRANSITION */
 
 .slideInPrev {
-    animation: slide-prev 0.3s;
-    -webkit-animation: slide-prev 0.3s;
-    -moz-animation: slide-prev 0.3s;
-    -o-animation: slide-prev 0.3s;
-    -ms-animation: slide-prev 0.3s;
+    @include animation(slide-prev, 0s, 0.3s);
 }
 
-@keyframes slide-prev {
-    from {
-        transform: translateX(-100vw)
-    }
-
-    to {
-        transform: translateX(0)
-    }
-}
-
-@-webkit-keyframes slide-prev {
-    from {
-        transform: translateX(-100vw)
-    }
-
-    to {
-        transform: translateX(0)
-    }
-}
-
-@-moz-keyframes slide-prev {
-    from {
-        transform: translateX(-100vw)
-    }
-
-    to {
-        transform: translateX(0)
-    }
-}
-
-@-o-keyframes slide-prev {
-    from {
-        transform: translateX(-100vw)
-    }
-
-    to {
-        transform: translateX(0)
-    }
-}
-
-@-ms-keyframes slide-prev {
+@include keyframe(slide-prev) {
     from {
         transform: translateX(-100vw)
     }

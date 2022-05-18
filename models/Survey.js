@@ -7,6 +7,7 @@ const surveySchema = new Schema({
     body: String,
     subject: String,
     recipients: [RecipientSchema],
+    numOfRecipients: Number,
     strongpositive: { type: Number, default: 0 },
     positive: { type: Number, default: 0 },
     neutral: { type: Number, default: 0 },

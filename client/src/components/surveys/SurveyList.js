@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import M from "materialize-css/dist/js/materialize.min.js";
+import '../../scss/SurveyList.scss';
 
 import { fetchSurveys } from "../../actions";
 import SurveyCard from "./SurveyCard";
@@ -9,17 +11,24 @@ import SurveyResultChart from "./SurveyResultChart";
 const SurveyList = ({ sortSelection }) => {
     const dispatch = useDispatch();
     const dispatchFetchSurveys = useCallback(() => dispatch(fetchSurveys()), [dispatch]);
-    useEffect(() => {
-        dispatchFetchSurveys();
-    }, [dispatchFetchSurveys])
-    
     const surveys = useSelector(state => state.surveys);
+    
+    useEffect(() => {
+        // fetching surveys from database:
+        dispatchFetchSurveys();
+    }, [dispatchFetchSurveys]);
 
+    useEffect(() => {
+        // for displaying tooltips:
+        var elems = document.querySelectorAll('.tooltipped');
+        M.Tooltip.init(elems);
+    });
+    
     const renderSurveys = () => {
         if (surveys.length === 0) {
             const linkToNew = () => {
                 return <span className="right"><Link to="/surveys/new">
-                    <i className="material-icons pink-text medium">add_circle_outline</i>
+                    <i className="material-icons medium">add_circle_outline</i>
                 </Link>
                 </span>
             }
@@ -36,53 +45,117 @@ const SurveyList = ({ sortSelection }) => {
             surveys.reverse().map(survey => {
 
                 const linkToDelete = () => {
-                    return <Link to={`/surveys/delete/${survey._id}`} className="right btn-flat white-text">
+                    return <Link
+                        to={`/surveys/delete/${survey._id}`}
+                        className="right btn-flat white-text delete-btn"
+                    >
                         <i className="material-icons">delete</i>
                     </Link>
                 }
 
-                const votesArray = [survey.strongpositive, survey.positive, survey.neutral, survey.negative, survey.strongnegative];
-                const colorsArray = ['#15fd4f', '#b5fc43', '#ffea00', '#ffae35', '#ff4c16'];
-                const iconNamesArray = ['sentiment_very_satisfied', 'sentiment_satisfied', 'sentiment_neutral', 'sentiment_dissatisfied', 'sentiment_very_dissatisfied'];
-                const renderIconOfVotes = (num) => {
-                    return (
-                        <a href="#!" style={{ color: colorsArray[num] }}><i className="material-icons">{iconNamesArray[num]}</i><b> {votesArray[num]}</b></a>
-                    )
-                };
-                const matchColor = () => {
-                    if (Math.max(...votesArray) === survey.strongpositive) {
-                        return colorsArray[0];
-                    } if (Math.max(...votesArray) === survey.positive) {
-                        return colorsArray[1];
-                    } if (Math.max(...votesArray) === survey.neutral) {
-                        return colorsArray[2];
-                    } if (Math.max(...votesArray) === survey.negative) {
-                        return colorsArray[3];
-                    } else {
-                        return colorsArray[4]
+                const votesByType = {
+                    'strong positive': {
+                        vote: survey.strongpositive,
+                        color: '#5fe043',
+                        iconName: 'sentiment_very_satisfied'
+                    },
+                    'positive': {
+                        vote: survey.positive,
+                        color: '#b4ff3b',
+                        iconName: 'sentiment_satisfied'
+                    },
+                    'neutral': {
+                        vote: survey.neutral,
+                        color: '#ffff3c',
+                        iconName: 'sentiment_neutral'
+                    },
+                    'negative': {
+                        vote: survey.negative,
+                        color: '#ffce2c',
+                        iconName: 'sentiment_dissatisfied'
+                    },
+                    'strong negative': {
+                        vote: survey.strongnegative,
+                        color: '#ff3c3c',
+                        iconName: 'sentiment_very_dissatisfied'
                     }
                 }
+                const votesArray = [];
+                const colorsArray = [];
+                    for (let type in votesByType) {
+                        votesArray.push(votesByType[type].vote);
+                        colorsArray.push(votesByType[type].color);
+                };
+                const totalVotes = votesArray.reduce((a, b) => a + b, 0);
+                const votesRate = () => { return totalVotes > 0 ? Math.round(totalVotes / survey.numOfRecipients * 100) : 0 };
+
+                const renderIconOfVotes = () => {
+                    return Object.entries(votesByType).map(type => {
+                        return (
+                            <a
+                                style={{ color: type[1].color }}
+                                className="tooltipped votes-icon"
+                                data-position="top"
+                                data-tooltip={type[0]}
+                            >
+                                <i className="material-icons">{type[1].iconName}</i>
+                                 {type[1].vote}
+                            </a>
+                        )
+                    });
+                };
+                const matchColor = () => {
+                    for (let type in votesByType) {
+                        if (Math.max(...votesArray) === votesByType[type].vote) return votesByType[type].color;
+                    };
+                };
+
                 const content = () => {
                     return <React.Fragment>
+                        <div className="chart">
                         <SurveyResultChart
                             data={votesArray}
                             height={180}
                             width={180}
                             colors={colorsArray}
-                        />
-                        <p className="right">Sent on: <i>{new Date(survey.dateSent).toLocaleDateString()}</i></p>
+                            labels={Object.keys(votesByType)}
+                            />
+                        </div>
+                        <p className="right">
+                            Sent on:
+                            <i>{new Date(survey.dateSent).toLocaleDateString()}</i>
+                        </p>
                         <br />
-                        <p className="right">Last responded on: <i>{survey.lastResponded ? new Date(survey.lastResponded).toLocaleDateString() : 'no votes yet'}</i></p>
+                        <p className="right">
+                            Last responded on:
+                            <i>
+                                {survey.lastResponded ? new Date(survey.lastResponded).toLocaleDateString() : 'no votes yet'}
+                            </i>
+                        </p>
+                        <br />
+                        <p className="right">
+                            Response rate: 
+                            <progress
+                                className="progress-bar tooltipped"
+                                value={totalVotes}
+                                max={survey.numOfRecipients}
+                                data-position="right"
+                                data-tooltip={`${votesRate()}%`}
+                            >
+                                {votesRate()}%
+                            </progress>
+                        </p>
+
                     </React.Fragment>
                 }
                 const actions = () => {
                     return <div className="card-action">
-                        {renderIconOfVotes(0)}
-                        {renderIconOfVotes(1)}
-                        {renderIconOfVotes(2)}
-                        {renderIconOfVotes(3)}
-                        {renderIconOfVotes(4)}
-                        <p className="right white-text"><b style={{ color: matchColor() }}>TOTAL VOTES: {votesArray.reduce((a, b) => a + b, 0)}</b></p>
+                        {renderIconOfVotes()}
+                        <p>
+                            <b style={{ color: matchColor() }}>
+                                TOTAL VOTES: {totalVotes}
+                            </b>
+                        </p>
                     </div>
                 }
 
@@ -101,7 +174,7 @@ const SurveyList = ({ sortSelection }) => {
     }
 
     return (
-        <div>
+        <div className='row card'>
             {renderSurveys()}
         </div>
     )

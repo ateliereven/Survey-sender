@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import M from "materialize-css/dist/js/materialize.min.js";
-import "materialize-css/dist/css/materialize.min.css";
 
 import Payments from "./Payments";
-import opinion from '../img/undraw_opinion_re_jix4.svg'
+//import opinion from '../img/undraw_opinion_re_jix4.svg'
 import logo from '../img/ms-logo.png'
 
 const Header = (props) => {
@@ -52,15 +51,14 @@ const Header = (props) => {
         M.Sidenav.init(elems, { edge: "right" });
     }, []);
     return (
-        <div className="navbar-fixed header">
+        <div className="navbar-fixed header z-depth-2">
             <nav className="blue-grey lighten-2" >
                 <div className="container nav-wrapper">
-                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active left" style={{ paddingLeft: "10px" }}>
-                        <img src={logo} alt="logo" style={{ paddingRight: "15px", height: "25px" }} />
-                        MySender</Link>
+                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active pink-text text-accent-2" style={{ paddingLeft: "10px" }}>
+                        <i><img src={logo} alt="logo" style={{ paddingRight: "15px", height: "25px" }} />
+                        MySender</i></Link>
                     <a href="#!" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></a>
                     <ul className="right hide-on-med-and-down">
-                        <li><img src={opinion} alt='opinion-icon' style={{ paddingTop: "2px" }} height={'60px'} className="center brand-logo valign-center" /></li>
                         {renderContent()}
                     </ul>
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from 'react-dom';
-import modalStyles from "../css/Modal.module.css";
+import modalStyles from "../scss/Modal.module.scss";
 
 const Modal = props => {
     // set state for opening and closing modal:
@@ -10,7 +10,7 @@ const Modal = props => {
     // to clear setTimeout after component unmounts:
     useEffect(() => {
         const timeOutId = idRef.current;
-        return () => clearTimeout(timeOutId)
+        return () => clearTimeout(timeOutId);
     }, [])
 
     // when user clicks to close modal:
@@ -25,17 +25,17 @@ const Modal = props => {
     }
 
     return ReactDOM.createPortal(
-        <div onClick={() => { handleClick() }} className={`${modalStyles.modalBackgroud} ui dimmer visible active`}>
+        <div onClick={() => { handleClick() }} className={`modal-overlay modal open`}>
             <div
                 onClick={(e) => { e.stopPropagation(); }}
-                className={`${modalStyles.position} ui standard  active modal modal-content ${isOpen ? modalStyles.zoom : modalStyles.zoomOut}`}
+                className={`modal ${isOpen ? modalStyles.zoom : modalStyles.zoomOut}`}
             >
                 <button
                     className="right btn-flat grey lighten-5 grey-text"
                     onClick={() => { handleClick() }}>
                     <i className="material-icons">close</i>
                 </button>
-                <h4 className={`modal-content pink-text ${modalStyles.title}`}>{props.title}</h4>
+                <h4 className={`modal-content pink-text text-accent-2 ${modalStyles.title}`}>{props.title}</h4>
                 <h6 className={`modal-content ${modalStyles.content}`}>{props.content}</h6>
                 <div className="actions modal-footer">
                     {props.actions}
@@ -43,7 +43,7 @@ const Modal = props => {
             </div>
         </div>,
         document.querySelector('#modal')
-    )
+    );
 }
 
 export default Modal;

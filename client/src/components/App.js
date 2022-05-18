@@ -3,7 +3,7 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ReactGA from 'react-ga';
 import * as actions from '../actions';
-import "../css/App.css";
+import "../scss/App.scss";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -43,9 +43,21 @@ const App = () => {
             <Router>
                 <div>
                     <RouteChangeTracker />
-                    <Route path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login", "/login/demo"]} exact component={Header} />
-                    <Route path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login", "/login/demo"]} exact component={Footer} />
-                    <Route path={["/", "/login", "/login/demo"]} exact component={Landing} />
+                    <Route
+                        path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login", "/login/demo"]}
+                        exact
+                        component={Header}
+                    />
+                    <Route
+                        path={["/", "/surveys", "/surveys/new", "/surveys/delete/:id", "/login", "/login/demo"]}
+                        exact
+                        component={Footer}
+                    />
+                    <Route
+                        path={["/", "/login", "/login/demo"]}
+                        exact
+                        component={Landing}
+                    />
                     <Route path="/login" exact component={Login} />
                     <Route path="/login/demo" exact component={Demo} />
                     <Route path={["/surveys", "/surveys/delete/:id"]} exact component={Dashboard} />

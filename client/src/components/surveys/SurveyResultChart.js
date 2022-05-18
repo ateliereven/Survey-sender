@@ -1,5 +1,5 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import 'chartjs-plugin-labels'; //this plugin requires older versions of react-chartjs-2 and chart.js (<3)
 
 
@@ -9,10 +9,18 @@ const SurveyResultChart = (props) => {
             data: props.data,
             backgroundColor: props.colors,
             borderWidth: 0
-        }]
+        }],
+        labels: props.labels
     }
     const options = {
         maintainAspectRatio: false,
+        legend: {
+            display: false
+        },
+        datalabels: {
+            display: true,
+            color: "white",
+          },
         plugins: { 
             labels: {
                 render: 'percentage',
@@ -26,7 +34,7 @@ const SurveyResultChart = (props) => {
     }
     return (
         <div style={{ width: `${props.width}px` }}>
-            <Pie
+            <Doughnut
                 height={props.height}
                 width={props.width}
                 data={data}

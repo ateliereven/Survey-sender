@@ -1,0 +1,122 @@
+@import 'materialize-css/sass/components/_color-variables.scss';
+
+// color theme:
+$primary-color: color("pink", "accent-2");
+$primary-color-light: lighten($primary-color, 15%);
+$primary-color-dark: darken($primary-color, 15%);
+$secondary-color: color("blue-grey", "lighten-2");
+$secondary-color-light: lighten($secondary-color, 25%);
+$secondary-color-dark: rgba(38, 50, 56, 0.85);
+$success-color: color("green", "base");
+$error-color: color("red", "base");
+$link-color: $primary-color;
+$link-color-hover: lighten($link-color, 5%);
+
+$background-color: color("grey", "lighten-3");
+
+// general:
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+body,
+html {
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   background-color: $background-color;
+   scroll-behavior: smooth;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+// fonts:
+$secondary-font-stack: Lato,
+'Helvetica Neue',
+Arial,
+Helvetica,
+sans-serif;
+
+// navbar:
+$sidenav-bg-color: $secondary-color-light;
+
+// buttons:
+$button-raised-background: $primary-color;
+.btn {
+   background-color: $button-raised-background !important;
+   border-radius: 20px !important;
+   &:hover {
+      background-color: lighten($button-raised-background, 3%) !important;
+   }
+}
+
+// links:
+a {
+   &:hover {
+      color: $link-color-hover;
+   }
+}
+
+// tooltip:
+.material-tooltip {
+   padding: 8px !important;
+   min-height: 30px !important;
+}
+
+// form:
+label {
+   font-size: 1rem;
+   color: $secondary-color-light;
+}
+form label {
+   font-size: 0.8rem;
+}
+
+// progress bar:
+progress {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   
+   max-width: 300px;
+   height: 12px;
+   border: none;
+   border-radius: 5px;
+   background-color: $secondary-color-dark;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+   color: $secondary-color-light;
+   &::-webkit-progress-value {
+      background-color: $secondary-color-light;
+      border-radius: 5px;
+   }
+   &::-webkit-progress-bar {
+      background-color: $secondary-color-dark;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+   }
+   &::-moz-progress-bar {
+      background-color: $secondary-color-light;
+      border-radius: 5px;
+   }
+}
+
+// modal:
+.modal {
+   display: block !important;
+   position: absolute;
+   top: calc(45% - 64px);
+   margin: auto;
+   max-height: unset !important;
+}
+.modal-overlay {
+   display: block;
+   background-color: rgba(0, 0, 0, .5) !important;
+   z-index: 1222 !important;
+   height: 100vh !important;
+   width: 100vw !important;
+   top: 0 !important;
+}
+
+@import 'materialize-css/sass/materialize.scss';

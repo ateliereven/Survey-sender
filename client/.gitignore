@@ -23,4 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # unused files
-/src/css/transitions.css
+/src/scss/transitions.css
+SignUp.js
+Demo-temp.js
+

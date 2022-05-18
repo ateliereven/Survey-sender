@@ -41,7 +41,7 @@ const Landing = () => {
             content={<div>
                 <p>Login with Google: <b>mysurvey.example@gmail.com</b></p>
                 <p>Enter password: <b>mysurveypass</b></p>
-                <button className="btn pink flow-text ">
+                <button className="btn flow-text ">
                     <a href="/auth/google" className="valign-wrapper center-align white-text">
                         Go to Google
                     </a>
