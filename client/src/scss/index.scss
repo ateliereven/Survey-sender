@@ -32,6 +32,10 @@ html {
    -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+   flex: 1 0 auto;
+}
+
 // fonts:
 $secondary-font-stack: Lato,
 'Helvetica Neue',
@@ -59,10 +63,20 @@ a {
    }
 }
 
+li {
+   a {
+      &:hover {
+         color: unset;
+      }
+   }
+}
+
 // tooltip:
 .material-tooltip {
    padding: 8px !important;
-   min-height: 30px !important;
+   min-height: 14px !important;
+   background-color: rgba(0, 0, 0, 0.45) !important;
+   border-radius: 4px !important;
 }
 
 // form:
@@ -106,7 +120,7 @@ progress {
 .modal {
    display: block !important;
    position: absolute;
-   top: calc(45% - 64px);
+   top: calc(25% - 64px);
    margin: auto;
    max-height: unset !important;
 }
@@ -119,4 +133,22 @@ progress {
    top: 0 !important;
 }
 
+//footer:
+  footer {
+     bottom: 0;
+     position: absolute;
+     width: 100%;
+     background-color: none;
+
+     .container {
+      border-top: 1.5px solid $primary-color-dark;
+      justify-content: center;
+     }
+  }
+
+       .footer-padding {
+          padding-bottom: 75px;
+       }
+
 @import 'materialize-css/sass/materialize.scss';
+@import 'utils';

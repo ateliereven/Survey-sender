@@ -7,7 +7,7 @@ const SurveyCard = (props) => {
             <div className="card-content white-text">
                 {props.link}
                 <span className="card-title">{props.title}</span>
-                    <h6><i>{props.body}</i></h6>
+                    <h6  style={{minHeight: '36px'}}><i>{props.body}</i></h6>
                 {props.content}
             </div>
             {props.actions}

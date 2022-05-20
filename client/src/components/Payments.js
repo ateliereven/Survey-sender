@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { useDispatch } from "react-redux";
+import M from "materialize-css/dist/js/materialize.min.js";
 import * as actions from '../actions';
 
-const Payments = () => {
+const Payments = (props) => {
     const dispatch = useDispatch(); 
+
+    // for displaying tooltips:
+    useEffect(() => {
+        var elems = document.querySelectorAll('.tooltipped');
+        M.Tooltip.init(elems);
+    });
     return (
         <StripeCheckout
             name="MySender"
@@ -13,9 +20,15 @@ const Payments = () => {
             token={token => dispatch(actions.handleToken(token))}
             stripeKey={process.env.REACT_APP_SRIPE_KEY}
         >
-            <button className="btn flow-text">
-                Add Credits
-            </button>
+            <div className="action-btn" >
+                <button
+                    className={`btn-floating btn-small blue-grey lighten-2 tooltipped ${props.credits < 1 && 'pulse'}`}
+                    data-position="right"
+                    data-tooltip="add credits"
+                >
+                <i className="material-icons">add</i>
+                </button>
+                </div>
         </StripeCheckout>
     )
 };

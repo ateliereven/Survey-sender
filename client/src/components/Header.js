@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 import Payments from "./Payments";
-//import opinion from '../img/undraw_opinion_re_jix4.svg'
 import logo from '../img/ms-logo.png'
 
-const Header = (props) => {
+const Header = () => {
     const auth = useSelector(state => state.auth);
     const renderContent = () => {
         switch (auth) {
@@ -16,58 +15,87 @@ const Header = (props) => {
             case false:
                 return (
                     <>
-                        <li><a href="#product" className="btn-flat blue-grey lighten-2 white-text center link-style"><b>Product</b></a></li>
+                        <li><a href="#product" className="btn-flat blue-grey lighten-2 white-text center link-style">Product</a></li>
                         <li><Link to="/login/demo" className="btn pink flow-text white-text">
                             Try Demo
                         </Link></li>
                         <li>
                             <Link to="/login" className="btn-flat blue-grey lighten-2 white-text center link-style">
-                                <b>Sign In</b>
+                                Sign In
                             </Link>
                         </li>
                     </>
                 )
             default:
                 return (
-                    <React.Fragment>
+                    <>
                         <li>
-                            <Payments />
-                            <b style={{ margin: '0 10px' }} className="badge">Credits: <span className="pink-text text-accent-2">{auth.credits}</span></b>
-                        </li>
-                        <li>
-                            <div>
-                                <a href="/api/logout" className="btn-flat blue-grey lighten-2 white-text link-style">
-                                    <b>Logout</b>
+                                <a href="/api/logout">
+                                    Logout
                                 </a>
-                            </div>
                         </li>
-                    </React.Fragment>
-                )
-        }
-    }
+                    </>
+                );
+        };
+    };
+    const renderMobileContent = () => {
+        switch (auth) {
+            case null:
+                return;
+            case false:
+                return;
+            default:
+                return (
+                    <>
+                    <li>
+                            <a>
+                                <span
+                                className="mr-2 left new badge"
+                                style={{marginLeft: '0px'}}
+                                data-badge-caption="credits"
+                                >
+                                {auth.credits}
+                                </span>
+                                <Payments credits={auth.credits} />
+                            </a>
+                        </li>
+                        <li>
+                            <a  className="action-btn">
+                            New survey
+                            <Link to="/surveys/new" className="btn-floating btn-small ml-2">
+                            <i className="material-icons">add</i>
+                                </Link>
+                                </a>
+                        </li>
+                        </>
+                );
+        };
+    };
+
     // for side nav bar open on small screens:
     useEffect(() => {
         var elems = document.querySelectorAll('.sidenav');
         M.Sidenav.init(elems, { edge: "right" });
     }, []);
+
     return (
-        <div className="navbar-fixed header z-depth-2">
+        <header className="navbar-fixed header z-depth-2">
             <nav className="blue-grey lighten-2" >
-                <div className="container nav-wrapper">
-                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active pink-text text-accent-2" style={{ paddingLeft: "10px" }}>
-                        <i><img src={logo} alt="logo" style={{ paddingRight: "15px", height: "25px" }} />
+                <div className="nav-wrapper">
+                    <Link to={auth ? '/surveys' : '/'} className="left brand-logo active pink-text text-accent-2 ml-3">
+                        <i><img src={logo} alt="logo" style={{ paddingRight: "15px", height: "22px" }} />
                         MySender</i></Link>
-                    <a href="#!" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></a>
-                    <ul className="right hide-on-med-and-down">
+                    <a href="#!" data-target="mobile" className="sidenav-trigger right"><i className="material-icons">menu</i></a>
+                    <ul className="right hide-on-med-and-down mr-3">
                         {renderContent()}
                     </ul>
                 </div>
             </nav>
-            <ul className="sidenav sidenav-close" style={{ width: '230px' }} id="mobile-demo">
+            <ul className="sidenav sidenav-close" style={{ width: '230px' }} id="mobile">
+                {renderMobileContent()}
                 {renderContent()}
             </ul>
-            <br />
-        </div>
+        </header>
 
     )
 }

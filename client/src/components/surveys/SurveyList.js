@@ -42,7 +42,7 @@ const SurveyList = ({ sortSelection }) => {
         }
         return (
             //map over all surveys and return a survey card with details for each survey:
-            surveys.reverse().map(survey => {
+            surveys.sort((a, b) => {return (new Date(b.lastResponded) - new Date(a.lastResponded))}).map(survey => {
 
                 const linkToDelete = () => {
                     return <Link
@@ -112,7 +112,7 @@ const SurveyList = ({ sortSelection }) => {
 
                 const content = () => {
                     return <React.Fragment>
-                        <div className="chart">
+                        <div className="py-1">
                         <SurveyResultChart
                             data={votesArray}
                             height={180}
@@ -136,7 +136,7 @@ const SurveyList = ({ sortSelection }) => {
                         <p className="right">
                             Response rate: 
                             <progress
-                                className="progress-bar tooltipped"
+                                className="ml-1 tooltipped"
                                 value={totalVotes}
                                 max={survey.numOfRecipients}
                                 data-position="right"
@@ -174,7 +174,7 @@ const SurveyList = ({ sortSelection }) => {
     }
 
     return (
-        <div className='row card'>
+        <div className='col l9 m8 s12'>
             {renderSurveys()}
         </div>
     )

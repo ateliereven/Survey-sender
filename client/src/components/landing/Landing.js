@@ -9,6 +9,7 @@ import surveyForm from '../../img/survey-form.svg';
 import surveyCard from '../../img/survey-card.svg';
 import illustration from '../../img/undraw_feedback_re_urmj.svg';
 import email from '../../img/email.png';
+//import opinion from '../img/undraw_opinion_re_jix4.svg'
 
 const Landing = () => {
     const auth = useSelector(state => state.auth);
@@ -53,7 +54,7 @@ const Landing = () => {
     if (auth) {
         history.push('/surveys')
     } else {
-        return <div className="container app-body">
+        return <main className="container app-body">
 
             <section className="flex-row">
                 <div className="flex-row" style={{alignItems: 'flex-start'}} >
@@ -83,7 +84,7 @@ const Landing = () => {
                 </div>
             </section>
 
-        </div>
+        </main>
     }
 
 };

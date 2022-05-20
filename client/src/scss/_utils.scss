@@ -1,3 +1,57 @@
+// set margin and padding classes:
+$spaceamounts: (
+   1,
+   2,
+   3
+);
+
+@each $space in $spaceamounts {
+
+   //margin top & bottom:
+   .my-#{$space} {
+      margin: calc(#{$space}rem/2) 0;
+   }
+
+   //margin left:
+   .ml-#{$space} {
+      margin-left: calc(#{$space}rem/2);
+   }
+
+   //margin right:
+      .mr-#{$space} {
+         margin-right: calc(#{$space}rem/2);
+      }
+   //margin bottom:
+   .mb-#{$space} {
+      margin-bottom: calc(#{$space}rem/2);
+   }
+
+   //padding top & bottom:
+   .py-#{$space} {
+      padding: calc(#{$space}rem/2) 0;
+   }
+
+   //padding bottom:
+   .pb-#{$space} {
+      padding-bottom: calc(#{$space}rem/2);
+   }
+
+      //padding top:
+      .pt-#{$space} {
+         padding-top: calc(#{$space}rem/2);
+      }
+
+   //padding right:
+      .pr-#{$space} {
+         padding-right: calc(#{$space}rem/2);
+      }
+
+   //padding all:
+   .p-#{$space} {
+      padding: calc(#{$space}rem/2);
+   }
+}
+
 .flex-row {
    margin-top: 1em;
    display: flex;
