@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import "../../scss/Landing.scss";
 
 import Carousel from "./Carousel";
 import CarouselItem from "./CarouselItem";
@@ -9,7 +10,7 @@ import surveyForm from '../../img/survey-form.svg';
 import surveyCard from '../../img/survey-card.svg';
 import illustration from '../../img/undraw_feedback_re_urmj.svg';
 import email from '../../img/email.png';
-//import opinion from '../img/undraw_opinion_re_jix4.svg'
+import opinion from '../../img/undraw_opinion_re_jix4.svg'
 
 const Landing = () => {
     const auth = useSelector(state => state.auth);
@@ -42,7 +43,7 @@ const Landing = () => {
             content={<div>
                 <p>Login with Google: <b>mysurvey.example@gmail.com</b></p>
                 <p>Enter password: <b>mysurveypass</b></p>
-                <button className="btn flow-text ">
+                <button className="btn flow-text my-2">
                     <a href="/auth/google" className="valign-wrapper center-align white-text">
                         Go to Google
                     </a>
@@ -54,33 +55,35 @@ const Landing = () => {
     if (auth) {
         history.push('/surveys')
     } else {
-        return <main className="container app-body">
-
-            <section className="flex-row">
-                <div className="flex-row" style={{alignItems: 'flex-start'}} >
-                <div className="flex-column width-55">
-                    <div className="textbox">
-                        <h4 className="pink-text text-accent-2"><i>How well is your product doing? Are your clients satisfied? How are you capturing that information?</i></h4>
-                        <h6>Whether you're offering a product or a service, harnessing customer insights will allow you to identify and correct problem areas, and gain an understanding of where you're struggling and succeeding. But how?</h6>
+        return <main className="container">
+            
+            <section className="row landing">
+                <div className="col s12 l6">
+                    <div className="card-panel z-depth-0">
+                        <h4 className="blue-grey-text"><i>How well is your product doing? Are your clients satisfied? How are you capturing that information?</i></h4>
+                        <h6 className="blue-grey-text text-darken-3">Whether you're offering a product or a service, harnessing customer insights will allow you to identify and correct problem areas, and gain an understanding of where you're struggling and succeeding. But how?</h6>
                         <h6 className="pink-text text-accent-2"><b>Introducing <i>MySender</i></b></h6>
-                    </div>
-                    <img id="illustration" src={illustration} alt="people" className="width-55" />
+                        <div className="row pt-2">
+                            <img className="col s4" src={opinion} alt="opinion" />
+                            <img className="col s5 offset-s3" src={illustration} alt="people" />
+                            </div>
+                    </div>   
                 </div>
-                <Carousel items={carouselData}/>
+                <div className="card col s12 l6 z-depth-0" style={{padding: '0'}}>
+                    <Carousel items={carouselData}/>
                 </div>
+                
             </section>
 
             <section id="product" className="p-2">
                 <h6 className="blue-grey-text text-lighten-2"><b>Product</b></h6>
-                <div className="flex-row" style={{ alignItems: 'flex-start' }}>
-                    <div className=" width-55">
-                    <div className="textbox">
+                <div className="row landing">
+                    <div className="card-panel col s12 m6 l6 z-depth-0">
                         <h4 className="pink-text text-accent-2"><i>Send one-click email surveys</i></h4>
                         <h6>Find out how people feel, what they like, or what's stopping them from using your product more.</h6>
                         <h6>MySender's survey emails track the customers' response, and the results are available to you directly on your dashboard.</h6>
                     </div>
-                    </div>
-                    <img src={email} alt="email" className="width-45"/>
+                    <img src={email} alt="email" className="col s12 m6 l6 my-1"/>
                 </div>
             </section>
 

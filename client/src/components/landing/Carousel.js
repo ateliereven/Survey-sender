@@ -49,7 +49,7 @@ const Carousel = ({ items }) => {
     }
 
     return (
-        <div className={carouselStyles.carousel}>
+        <div className={`${carouselStyles.carousel}`}>
             <i className={`material-icons medium white-text ${carouselStyles.leftArrow}`} onClick={prevItem}>keyboard_arrow_left</i>
             <i className={`material-icons medium white-text ${carouselStyles.rightArrow}`} onClick={nextItem}>keyboard_arrow_right</i>
             {carouselItems}

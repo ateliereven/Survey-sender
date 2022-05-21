@@ -1,49 +1,13 @@
-@media only screen and (max-width: 1300px) {
-   .width-55 {
-      width: 42%;
-   }
-}
-
 @media only screen and (min-width: 990px) {
-// card:
 .card-content {
    min-height: 380px;
 }
-   }
-
-
-@media only screen and (max-width: 800px) {
-   .width-55 {
-      width: 70vw;
-   }
-
-   .width-45 {
-      width: 70vw;
-   }
-   
-   .textbox {
-      margin: 0 0em 2em 0;
-   }
 }
 
+
 @media only screen and (max-width: 600px) {
-   .width-55 {
-      width: 90vw;
-   }
-
-   .width-45 {
-      width: 90vw;
-   }
-
-   .flex-row {
-      img {
-      margin-bottom: 3.5em;
-      }
-   }
-
    form label,
    label {
       font-size: 13px;
    }
-
 }

@@ -15,14 +15,17 @@ const Header = () => {
             case false:
                 return (
                     <>
-                        <li><a href="#product" className="btn-flat blue-grey lighten-2 white-text center link-style">Product</a></li>
-                        <li><Link to="/login/demo" className="btn flow-text">
-                            Try Demo
-                        </Link></li>
                         <li>
-                            <Link to="/login" className="btn-flat blue-grey lighten-2 white-text center link-style">
+                            <a href="#product" className="btn-flat blue-grey lighten-2 white-text center">Product</a>
+                        </li>
+                        <li>
+                            <Link to="/login" className="btn-flat blue-grey lighten-2 white-text center">
                                 Sign In
                             </Link>
+                        </li>
+                        <li><Link to="/login/demo" className="btn flow-text">
+                            Try Demo
+                        </Link>
                         </li>
                     </>
                 )

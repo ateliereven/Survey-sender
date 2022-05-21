@@ -3,7 +3,6 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ReactGA from 'react-ga';
 import * as actions from '../actions';
-import "../scss/App.scss";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -39,7 +38,7 @@ const App = () => {
 
 
     return (
-        <div className={`app-body`}>
+        <div>
             <Router>
                 <div>
                     <RouteChangeTracker />

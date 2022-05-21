@@ -1,14 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-@import './index.scss';
+@use './index.scss' as *;
 @import "config";
-
-:root {
-    --width: 45%;
-}
 
 .carousel {
     position: relative;
-    width: var(--width);
     height: inherit !important;
     overflow: hidden;
     background-color: $secondary-color-dark;
@@ -18,7 +12,6 @@
 }
 
 .carouselItem {
-    height: 620px;
     font-family: $secondary-font-stack;
     padding: 1em;
     font-size: 1.6rem;
@@ -36,6 +29,7 @@
     img {
         width: 70%;
         padding-top: 5px;
+        max-height: 300px;
     }
 }
 
@@ -54,10 +48,6 @@
     justify-content: center;
 }
 
-.pink {
-    color: $primary-color;
-}
-
 .carouselNav {
     width: 100%;
     padding: 20px 0;
@@ -68,8 +58,8 @@
 }
 
 %buttons {
-width: 12px;
-height: 12px;
+width: 10px;
+height: 10px;
 display: inline-block;
 border-radius: 50%;
 margin: 0 5px;
@@ -134,29 +124,8 @@ cursor: pointer;
     }
 }
 
-@media only screen and (max-width: 1300px) {
-    :root {
-        --width: 55%;
-    }
-
-}
-
-@media only screen and (max-width: 800px) {
-    :root {
-        --width: 70vw;
-    }
-
-}
 
 @media only screen and (max-width: 600px) {
-    :root {
-        --width: 90vw;
-    }
-
-    .carousel {
-        width: var(--width);
-    }
-
     .carouselItem {
         height: calc(97vh - 95px);
     }
