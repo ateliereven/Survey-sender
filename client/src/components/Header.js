@@ -16,7 +16,7 @@ const Header = () => {
                 return (
                     <>
                         <li><a href="#product" className="btn-flat blue-grey lighten-2 white-text center link-style">Product</a></li>
-                        <li><Link to="/login/demo" className="btn pink flow-text white-text">
+                        <li><Link to="/login/demo" className="btn flow-text">
                             Try Demo
                         </Link></li>
                         <li>
@@ -62,7 +62,7 @@ const Header = () => {
                         <li>
                             <a  className="action-btn">
                             New survey
-                            <Link to="/surveys/new" className="btn-floating btn-small ml-2">
+                            <Link to="/surveys/new" className="btn-floating btn-small pink accent-2 ml-2">
                             <i className="material-icons">add</i>
                                 </Link>
                                 </a>
@@ -79,7 +79,7 @@ const Header = () => {
     }, []);
 
     return (
-        <header className="navbar-fixed header z-depth-2">
+        <header className="navbar-fixed z-depth-2 mb-2">
             <nav className="blue-grey lighten-2" >
                 <div className="nav-wrapper">
                     <Link to={auth ? '/surveys' : '/'} className="left brand-logo active pink-text text-accent-2 ml-3">

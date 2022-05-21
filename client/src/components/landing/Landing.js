@@ -70,7 +70,7 @@ const Landing = () => {
                 </div>
             </section>
 
-            <section id="product">
+            <section id="product" className="p-2">
                 <h6 className="blue-grey-text text-lighten-2"><b>Product</b></h6>
                 <div className="flex-row" style={{ alignItems: 'flex-start' }}>
                     <div className=" width-55">

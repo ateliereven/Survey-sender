@@ -7,11 +7,11 @@ const AuthForm = (props) => {
     //Return an input element to the component prop, and hook it with relevant properties deconstructed from formProps:
     const inputField = ({ input, label, meta: { error, touched } }) => {
         return <div>
-            <label style={{ fontSize: "15px" }}>{label}</label>
-            <input style={{ marginBottom: '5px' }} {...input} placeholder={label === "Email Address" ? props.emailPlaceholder : props.passPlaceholder} />
-            <div className="red-text" style={{ marginBottom: '15px' }}>
+            <label>{label}</label>
+            <input {...input} placeholder={label === "Email Address" ? props.emailPlaceholder : props.passPlaceholder} />
+            <label className="red-text mb-1">
                 {touched && error}
-            </div>
+            </label>
         </div>
     };
     // the field attributes:
@@ -65,8 +65,8 @@ const AuthForm = (props) => {
                     </i>
                     <Field type={showPassword ? "text" : "password"} component={inputField} label={FIELDS[1].label} name={FIELDS[1].name} />
                     {props.isSignup && <Field type={showPassword ? "text" : "password"} component={inputField} label={FIELDS[2].label} name={FIELDS[2].name} />}
-                    <button type="submit" className={`${props.isSignup ? 'pink accent-3' : 'teal'} btn white-text`}>
-                        <b>{props.isSignup ? 'Sign up' : 'Sign in'}</b>
+                    <button type="submit" className={`${!props.isSignup && 'teal'} btn`}>
+                        {props.isSignup ? 'Sign up' : 'Sign in'}
                     </button>
                 </form>
             )}

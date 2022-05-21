@@ -25,7 +25,7 @@ const Modal = props => {
     }
 
     return ReactDOM.createPortal(
-        <div onClick={() => { handleClick() }} className={`modal-overlay modal open`}>
+        <div onClick={() => { handleClick() }} className={`modal modal-overlay`}>
             <div
                 onClick={(e) => { e.stopPropagation(); }}
                 className={`modal ${isOpen ? modalStyles.zoom : modalStyles.zoomOut}`}

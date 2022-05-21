@@ -12,6 +12,7 @@ const Payments = (props) => {
         var elems = document.querySelectorAll('.tooltipped');
         M.Tooltip.init(elems);
     });
+    
     return (
         <StripeCheckout
             name="MySender"
@@ -22,7 +23,7 @@ const Payments = (props) => {
         >
             <div className="action-btn" >
                 <button
-                    className={`btn-floating btn-small blue-grey lighten-2 tooltipped ${props.credits < 1 && 'pulse'}`}
+                    className={`btn-floating btn-small tooltipped ${props.credits < 1 && 'pulse'}`}
                     data-position="right"
                     data-tooltip="add credits"
                 >

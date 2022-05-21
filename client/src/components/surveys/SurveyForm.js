@@ -23,7 +23,9 @@ const SurveyForm = (props) => {
         <div className="container">
             <form onSubmit={props.handleSubmit(onSubmit)} className="pink-text">
                 {renderFields()}
-                <Link to="/surveys" className="red btn-flat white-text">Cancel</Link>
+                <Link to="/surveys" className="red btn-flat white-text">Cancel
+                <i className="material-icons left">close</i>
+                </Link>
                 <button className="teal btn-flat right white-text">
                     Next
                     <i className="material-icons right">done</i>

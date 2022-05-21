@@ -5,12 +5,14 @@ $primary-color: color("pink", "accent-2");
 $primary-color-light: lighten($primary-color, 15%);
 $primary-color-dark: darken($primary-color, 15%);
 $secondary-color: color("blue-grey", "lighten-2");
-$secondary-color-light: lighten($secondary-color, 25%);
+$secondary-color-light: lighten($secondary-color, 30%);
 $secondary-color-dark: rgba(38, 50, 56, 0.85);
 $success-color: color("green", "base");
 $error-color: color("red", "base");
 $link-color: $primary-color;
 $link-color-hover: lighten($link-color, 5%);
+$placeholder-text-color: $secondary-color;
+$input-focus-color: $primary-color-dark;
 
 $background-color: color("grey", "lighten-3");
 
@@ -36,6 +38,14 @@ main {
    flex: 1 0 auto;
 }
 
+  section {
+     min-height: calc(100vh - 80px);
+  }
+
+.row {
+   margin-bottom: unset !important;
+}
+
 // fonts:
 $secondary-font-stack: Lato,
 'Helvetica Neue',
@@ -45,15 +55,14 @@ sans-serif;
 
 // navbar:
 $sidenav-bg-color: $secondary-color-light;
+  header {
+     z-index: 999 !important;
+  }
 
 // buttons:
 $button-raised-background: $primary-color;
-.btn {
-   background-color: $button-raised-background !important;
+.btn, .btn-flat {
    border-radius: 20px !important;
-   &:hover {
-      background-color: lighten($button-raised-background, 3%) !important;
-   }
 }
 
 // links:
@@ -80,12 +89,14 @@ li {
 }
 
 // form:
+$input-font-size: 1rem;
 label {
    font-size: 1rem;
    color: $secondary-color-light;
 }
 form label {
-   font-size: 0.8rem;
+   font-size: 0.9rem;
+   color: $secondary-color-dark;
 }
 
 // progress bar:
@@ -119,18 +130,25 @@ progress {
 // modal:
 .modal {
    display: block !important;
-   position: absolute;
-   top: calc(25% - 64px);
-   margin: auto;
-   max-height: unset !important;
+   top: calc(50vh - 47% + 64px);
+   max-height: 85% !important;
+
+   .modal-footer {
+      .btn {
+         margin: 0.5rem !important;
+      }
+   }
 }
 .modal-overlay {
    display: block;
    background-color: rgba(0, 0, 0, .5) !important;
    z-index: 1222 !important;
-   height: 100vh !important;
+   min-height: 100vh !important;
    width: 100vw !important;
    top: 0 !important;
+}
+.card-panel {
+   padding: 20px !important;
 }
 
 //footer:
@@ -148,6 +166,10 @@ progress {
 
        .footer-padding {
           padding-bottom: 75px;
+       }
+
+       .row.footer-padding {
+          margin-bottom: 0;
        }
 
 @import 'materialize-css/sass/materialize.scss';

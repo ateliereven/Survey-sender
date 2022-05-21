@@ -23,7 +23,7 @@ const Dashboard = () => {
                     }
                     <div className="action-btn py-1">
                     <p className="tab col my-1 pink-text text-accent-2">Create new survey</p>
-                        <Link to="/surveys/new" className="btn-floating btn-small pulse">
+                        <Link to="/surveys/new" className="btn-floating btn-small pulse pink accent-2">
                             <i className="material-icons">add</i>
                         </Link>
                     </div>

@@ -12,15 +12,15 @@ const SurveyNew = () => {
     const renderContent = () => {
         if (showFormReview) {
             return (
-                <div className="row footer-padding" style={{marginBottom: '0px'}}>
+                <div className="row footer-padding">
                     <SurveyFormReview onCancel={() => { setShowFormReview(false) }} />
-                    <img src={delivered} alt="delivered" className="col l3 offset-l5 s7  offset-s3"></img>
+                    <img src={delivered} alt="delivered" className="col l3 offset-l5 s7 offset-s3"></img>
                 </div>)
         }
         return (
-            <div className="row footer-padding" style={{marginBottom: '0px'}}>
+            <div className="row footer-padding">
                 <SurveyForm onSurveySubmit={() => { setShowFormReview(true) }} />
-                <img src={newMessage} alt="new message" className="col l4 offset-l4 s9  offset-s1"></img>
+                <img src={newMessage} alt="new message" className="col l4 offset-l4 s9 offset-s1"></img>
             </div>
         )
     }

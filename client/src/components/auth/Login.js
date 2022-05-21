@@ -21,11 +21,11 @@ const Login = () => {
     const renderActions = () => {
         return (
             <React.Fragment>
-                <span><b>{!isSignup ? "Don't have an account?" : "Have an account?"}</b></span>
-                <button style={{ marginLeft: '10px' }} className={`btn ${!isSignup ? 'pink accent-3' : 'teal'}  white-text`} onClick={() => toggleIsSignUp()}>
-                    <b>{!isSignup ? 'Sign Up' : 'Sign In'}</b>
+                <span className="pr-1"><b>{!isSignup ? "Don't have an account?" : "Have an account?"}</b></span>
+                <button className={`btn ${isSignup && 'teal'}`} onClick={() => toggleIsSignUp()}>
+                    {!isSignup ? 'Sign Up' : 'Sign In'}
                 </button>
-                <Link to='/' style={{ marginLeft: '30px' }} className="btn grey white-text right">Cancel</Link>
+                <Link to='/' className="btn grey white-text">Cancel</Link>
             </React.Fragment>
         )
     }
@@ -33,19 +33,19 @@ const Login = () => {
     const renderContent = () => {
         return (
             <div className="row">
-                <ul className="center-align col s12 m6 offset-m3" style={{ marginTop: '0', marginBottom: '0' }}>
-                    <i className='small material-icons pink-text text-accent-3 valign-center'>account_circle</i>
+                <ul className="center-align col s12 m6 l8 offset-m3 offset-l2" style={{ marginTop: '0', marginBottom: '0' }}>
+                    <i className='small material-icons pink-text text-accent-2 valign-center'>account_circle</i>
                     {!isSignup && <li className="card-panel grey lighten-4">
-                        <a href="/auth/google" className="valign-wrapper black-text center-align">
-                            <img src={GoogleLogo} alt='G' style={{ paddingRight: '10px' }} />Login With Google
+                        <a href="/auth/google" className="valign-wrapper black-text" style={{ justifyContent: 'center' }}>
+                            <img src={GoogleLogo} alt='G' height='20px' className="mr-1" />Login With Google
                         </a>
                     </li>}
                     {!isSignup && 'or'}
                     <li className="card-panel grey lighten-4 left-align">
                         <AuthForm
                             onSubmit={onSubmit}
-                            emailPlaceholder="Please enter the email you signed-up with"
-                            passPlaceholder="Please enter the password you signed-up with"
+                            emailPlaceholder="The email you signed-up with"
+                            passPlaceholder="The password you signed-up with"
                             isSignup={isSignup}
                         />
                     </li>
