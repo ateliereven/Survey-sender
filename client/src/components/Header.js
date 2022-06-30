@@ -63,12 +63,12 @@ const Header = () => {
                             </a>
                         </li>
                         <li>
-                            <a  className="action-btn">
+                            <span className="action-btn" style={{fontWeight: '500', padding: '0 32px'}}>
                             New survey
                             <Link to="/surveys/new" className="btn-floating btn-small pink accent-2 ml-2">
                             <i className="material-icons">add</i>
                                 </Link>
-                                </a>
+                            </span> 
                         </li>
                         </>
                 );

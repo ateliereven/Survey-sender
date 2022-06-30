@@ -93,6 +93,7 @@ const SurveyList = ({ sortSelection }) => {
                     return Object.entries(votesByType).map(type => {
                         return (
                             <a
+                                key={type[0]}
                                 style={{ color: type[1].color }}
                                 className="tooltipped votes-icon"
                                 data-position="top"

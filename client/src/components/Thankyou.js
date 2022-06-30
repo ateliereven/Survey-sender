@@ -5,7 +5,7 @@ import thankyou from "../img/undraw_super_thank_you_re_f8bo.svg"
 
 const Thankyou = () => {
     const { choice } = useParams();
-    console.log(choice);
+    //console.log(choice);
     const onFeedback = () => {
         if (choice === 'negative' || choice === 'strongnegative') {
             return <h5>We hope to improve our service to your satisfaction</h5>
@@ -15,12 +15,11 @@ const Thankyou = () => {
         }
         return;
     }
-    return <div className="row center container">
-        <div className="section"></div>
+    return <section className="row center container">
         <h1 className="pink-text text-accent-2">Thanks for voting!</h1>
         {onFeedback()}
-        <img src={thankyou} alt="people" width={'50%'} style={{marginTop: '4%'}}/>
-    </div>
+        <img src={thankyou} alt="people" width='45%' className="pt-3"/>
+    </section>
 }
 
 export default Thankyou;

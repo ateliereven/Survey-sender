@@ -10,6 +10,8 @@ import surveyForm from '../../img/survey-form.svg';
 import surveyCard from '../../img/survey-card.svg';
 import illustration from '../../img/undraw_feedback_re_urmj.svg';
 import email from '../../img/email.png';
+import survey from '../../img/survey-form-confirm.png';
+import dashboard from '../../img/survey-on-dashboard.png';
 import opinion from '../../img/undraw_opinion_re_jix4.svg'
 
 const Landing = () => {
@@ -78,12 +80,27 @@ const Landing = () => {
             <section id="product" className="p-2">
                 <h6 className="blue-grey-text text-lighten-2"><b>Product</b></h6>
                 <div className="row landing">
-                    <div className="card-panel col s12 m6 l6 z-depth-0">
+                    <div className="col s12 m6 l6">
                         <h4 className="pink-text text-accent-2"><i>Send one-click email surveys</i></h4>
                         <h6>Find out how people feel, what they like, or what's stopping them from using your product more.</h6>
                         <h6>MySender's survey emails track the customers' response, and the results are available to you directly on your dashboard.</h6>
                     </div>
-                    <img src={email} alt="email" className="col s12 m6 l6 my-1"/>
+                    <img src={email} alt="email" className="col s12 m6 l6 my-1 z-depth-1"/>
+                </div>
+                <div className="row landing">
+                    <div className="col s12 m6 l6">
+                        <h4 className="pink-text text-accent-2"><i>Step #1: Build your survey</i></h4>
+                        <h6>Craft your survey by filling in a simple survey form. Compose your survey question, add your recipients' email list and you're all set.</h6>
+                        <h6>Just click send, and SendGrid email service will get your survey out there.</h6>
+                    </div>
+                    <img src={survey} alt="survey form" className="col s12 m6 l6 my-1 z-depth-1"/>
+                </div>
+                <div className="row landing pb-4">
+                    <div className="col s12 m6 l6 z-depth-0">
+                        <h4 className="pink-text text-accent-2"><i>Step #2: View your responses</i></h4>
+                        <h6>Once sent your survey responses will show up in real-time in the dashboard.</h6>
+                    </div>
+                    <img src={dashboard} alt="survey on dashboard" className="col s12 m6 l6 my-1 mb-2 z-depth-1"/>
                 </div>
             </section>
 
